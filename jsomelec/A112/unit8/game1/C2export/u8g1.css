@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* this first section was just for testing */
+
+/*
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+#tryagain_button {
+	background: linear-gradient(#DFDBF0, #A694D1) repeat scroll 0% 0% transparent;
+	font-size: 30px;
+	color: white;
+	border-radius: 10px;
+	text-align: center;
+	font-weight: 700;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+	font-family: 'Open Sans', sans-serif;
+}
+
+#tryagain_button:hover {
+	background: linear-gradient(#F7B26E, #F2800D) repeat scroll 0% 0% transparent;
+}
+
+#feedback {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	color: #4B306A;
+	box-shadow: none;
+	border: none;
+	padding: 10px;
+}
+*/
+
+#checkbox {
+        font-size: 30px;
+        padding: 10px;
+
+}

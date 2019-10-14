@@ -1,0 +1,7 @@
+*.capx
+*.capx.*
+jsomelec/labs/node_modules
+jsomelec/labs/src
+jsomelec/labs/e2e
+jsomelec/A212
+.DS_Store

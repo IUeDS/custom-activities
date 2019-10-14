@@ -1,0 +1,14 @@
+/* add in CSS for when inside an iframe by default */
+body {
+	background-image:  none;
+}
+
+.content_wrapper {
+	width:  100%;
+	background-image:  none !important;
+}
+
+.content {
+	margin-bottom:  0;
+	box-shadow:  none;
+}

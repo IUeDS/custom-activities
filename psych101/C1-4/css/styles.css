@@ -1,0 +1,276 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.answerable_area {
+    position: absolute;
+}
+
+.interactive-image {
+    margin-top: 30px;
+}
+
+.label_dropzone {
+    outline: solid black 1px;
+}
+
+.answer_hover {
+    outline: solid #FCE694 3px;
+    cursor: pointer;
+}
+
+.SVG_hover {
+    fill: #FCE694 !important;
+    fill-opacity: 1 !important;
+}
+
+#transparent {
+    fill-opacity: 0;
+}
+
+.answered {
+    fill: #FCE694;
+    outline: solid #FCE694 3px;
+}
+
+.SVG_answer {
+    fill: #FCE694;
+}
+
+.not-answered {
+    outline: none;
+}
+
+.button_area {
+    float: left;
+    width: 35%;
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.reset_response, .submit_response, .current_score, .restart {
+    float: left;
+    clear: left;
+    width: 90%;
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    border: 0; /* reset button styling */
+}
+
+.reset_response {
+    color: #FFF;
+    background-color: #7d110b;
+}
+
+.reset_response:hover {
+    color: #CCC;
+    cursor: pointer;
+}
+
+.current_score {
+    background-color: #e5e5e5;
+}
+
+.submit_response {
+    color: black;
+    background-color: #84d0a5;
+    margin-bottom: 30px;
+}
+
+.submit_response:hover {
+    color: #CCC;
+    cursor: pointer;
+}
+
+.restart {
+    color: #FFF;
+    background-color: #b71a1a;
+}
+
+.restart:hover {
+    cursor: pointer;
+    color: #CCC;
+}
+
+/*.next {
+    background-color: #CCC;
+    height: 20%;
+    width: 35%;
+    border-radius: 10px;
+    font-size: 1em;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.next:hover {
+    color: white;
+    cursor: pointer;
+}*/
+
+.instructions {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.75em;
+}
+
+.question_area {
+    background-color: #CCC;
+    border: solid black 2px;
+    padding: 5px;
+    text-align: center;
+    margin: 10px;
+    width: 180px;
+    font-size: 14px;
+    /*position: absolute;*/
+    float: left;
+	z-index: 200;
+	/* make text un-selectable */
+    -moz-user-select: none; 
+    -khtml-user-select: none; 
+    -webkit-user-select: none; 
+    -o-user-select: none; 
+}
+
+.answer_area {
+    position: relative !important;
+    padding: 20px;
+    margin-left: 80px;
+}
+
+.wrapper {
+    padding: 20px;
+    /*padding: 20px;
+    width: 60%;
+    margin: 20px auto;
+	margin-bottom: 30px;*/
+}
+
+/*.feedback {
+    position: absolute;
+    height: 70%;
+	width: 50%;
+    bottom: 10%;
+    visibility: hidden;
+    padding: 10px;
+    background-color: white;
+    z-index: 300;
+    text-align: center;
+    padding: 10px;
+}*/
+
+.feedback_text {
+    color: #666;
+}
+
+.modal.in .modal-dialog {
+    transform: translate(0px, 200px); /* make this appear a bit lower on the screen */
+}
+
+.draggable-hover:hover {
+    cursor: pointer;
+}
+
+/*vertically align single line of text*/
+/*.next:before, .restart:before {
+    content:"";
+    display:block;
+    height:50%;
+    width:100%;
+    margin-top:-0.5em;*//*half of the font size*/
+/*}*/
+
+/* checkmark on completion */
+.checkmark_wrapper {
+  width: 100px;
+  /*margin: 4em auto 0;*/
+  margin-right: 40px;
+  float: left;
+}
+
+.checkmark {
+  stroke: green;
+  stroke-dashoffset: 745.74853515625;
+  stroke-dasharray: 745.74853515625;
+  animation: dash 2s ease-out forwards;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 745.74853515625;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.clearfix:after {
+    visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+.ui-draggable-disabled {
+	cursor: default !important;
+	background-color: #EEE;
+	border: 2px solid #DDD;
+}
+
+.text_answer {
+    width: 200px;
+    height: auto;
+    position: relative;
+    float: left;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+    border: 0; /* no border for button */
+    background-color: white;
+}
+
+.static-image {
+    display: table;
+    margin: 10px auto;
+}
+
+.correct {
+    border: solid green 5px;
+    color: green;
+    background-color: rgba(194, 239, 179, 0.9);
+}
+
+.incorrect {
+    border: solid red 5px;
+    color: black;
+    background-color: rgba(206, 45, 79, 0.9);
+}
+
+.bordered {
+    outline: solid #575757 3px;
+}
+
+.answer_border {
+    outline: solid #FCE694 3px;
+}
+
+.final-score {
+    font-size: 24px;
+    padding: 20px;
+    display: table;
+    margin: 20px auto;
+    text-align: center;
+}

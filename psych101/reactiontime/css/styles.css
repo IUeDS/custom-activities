@@ -1,0 +1,126 @@
+/* center vertically and horizontally */
+/* https://css-tricks.com/centering-in-the-unknown/ */
+.wrapper {
+    /*height: 100%;*/
+    height: 500px;
+    width: 75%;
+    margin: 0 auto;
+    white-space: nowrap;
+    text-align: center;
+}
+.wrapper:before{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    /* adjust for white space between pseudo element and next sibling */
+    margin-right: -.25em;
+    /* stretch line height */
+    height: 100%; 
+}
+.display_area{
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+    padding: 20px;
+}
+
+.inactive_wrapper {
+    background-color: #BBB;
+}
+
+.active_wrapper_white_circle {
+    background-color: black;
+}
+
+.active_wrapper_black_circle {
+    background-color: white;
+}
+
+.visible {
+    display: inherit;
+}
+
+.hidden {
+    display: none;
+}
+
+.white_circle, .black_circle {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+.white_circle {
+    background-color: white;
+}
+
+.black_circle {
+    background-color: black;
+}
+
+.restart {
+    position: absolute;
+    top: 10px;
+    padding: 10px;
+}
+
+.restart:hover {
+    cursor: pointer;
+}
+
+.results_area {
+    background-color: white;
+}
+
+.graph_bar {
+    background-color: #CCC;
+    width: 50px;
+    margin: 20px;
+    float: left;
+}
+
+.incorrect {
+    color: red;
+    font-weight: 700;
+}
+
+/* clearfix */
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+/* D3 */
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}

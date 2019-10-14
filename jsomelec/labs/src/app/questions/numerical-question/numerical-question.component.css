@@ -1,0 +1,5 @@
+.lab_numerical_area {
+	/* make sure submit button falls to next line */
+	/* was not necessary before since we had hidden divs with range values */
+	display: block; 
+}

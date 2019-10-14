@@ -1,0 +1,13 @@
+<div [innerHtml]="question.questionText | safeHtml"></div>
+<div class="lab_question clearfix">
+	<div class="lab_numerical_area">
+		<span *ngIf="question.textBeforeInput" [innerHtml]="question.textBeforeInput | safeHtml"></span>
+		<input type="text" class="lab_numeric_input" [(ngModel)]="answer.studentAnswer">
+		<span *ngIf="question.textAfterInput" [innerHtml]="question.textAfterInput | safeHtml"></span>
+	</div>
+	<div class="lab_submit_button_numeric" (click)="submitAnswer()">Submit</div>
+	<div class="lab_answer_feedback" [class.lab_tada]="feedbackVisible">
+	  	<h1>Lab Feedback</h1>
+	  	<div class="lab_feedback_text" [innerHtml]="feedback | safeHtml"></div>
+	</div>
+</div>

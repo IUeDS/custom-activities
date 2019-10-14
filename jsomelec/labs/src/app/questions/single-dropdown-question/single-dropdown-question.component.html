@@ -1,0 +1,13 @@
+<div [innerHtml]="question.questionText | safeHtml"></div>
+<div class="lab_question clearfix">
+	<select class="lab_question_dropdown" [(ngModel)]="selectedOption">
+		<option *ngFor="let option of question.options" [ngValue]="option">
+			{{option.text}}
+		</option>
+	</select>
+	<div class="lab_submit_button" (click)="submitAnswer()">Submit</div>
+  	<div class="lab_answer_feedback" [class.lab_tada]="feedbackVisible">
+    	<h1>Lab Feedback</h1>
+    	<div class="lab_feedback_text" [innerHtml]="feedback | safeHtml"></div>
+  	</div>
+</div>

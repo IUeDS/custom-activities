@@ -1,0 +1,14 @@
+<div [innerHtml]="question.questionText | safeHtml"></div>
+<div class="lab_question clearfix">
+	<div *ngFor="let option of question.options" class="lab_question_option">
+		<div class="lab_question_button" (click)="selectOption(option)"
+			[class.answered]="selectedOption === option"
+			[class.unanswered]="selectedOption !== option"></div>
+		<div class="lab_option_text" [innerHtml]="option.text | safeHtml"></div>
+	</div>
+  <div class="lab_submit_button" (click)="submitAnswer()">Submit</div>
+  <div class="lab_answer_feedback" [class.lab_tada]="feedbackVisible">
+    <h1>Lab Feedback</h1>
+    <div class="lab_feedback_text" [innerHtml]="feedback | safeHtml"></div>
+  </div>
+</div>

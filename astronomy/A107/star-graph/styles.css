@@ -1,0 +1,99 @@
+main {
+	padding:  20px;
+}
+
+.astro-star-image {
+	/* so selections can be placed absolutely, relative to image parent */
+	position:  relative; 
+}
+
+.under-image, .astro-tooltip {
+	margin-top:  30px;
+}
+
+.astro-tooltip {
+	opacity:  0;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.astro-click-alert {
+	margin-top:  30px;
+}
+
+.astro-star-selection {
+	border:  solid red 1px;
+	border-radius:  50%;
+	height:  10px;
+	width:  10px;
+	z-index:  200;
+	position:  absolute;
+	color:  red;
+}
+
+.axis-label {
+	font-size:  1em;
+	font-weight:  700;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: cornflowerblue;
+  fill:  white;
+}
+
+.dot-selected {
+	stroke:  red !important;
+}
+
+.dot-static {
+	/*stroke:  black !important;*/
+	display:  none;
+}
+
+.tooltip {
+  position: absolute;
+  width: 100px;
+  height: 28px;
+  pointer-events: none;
+  padding:  5px;
+  background-color:  white;
+  border:  solid black 1px;
+}
+
+.regression {
+	fill:  none;
+	stroke:  black;
+	stroke-width:  1.5px;
+}
+
+.astro-star-image:hover {
+	cursor:  pointer;
+}
+
+.astro-star-image.disabled:hover {
+	cursor:  not-allowed;
+}
+
+.btn-success {
+	background-color:  #387f38;
+	border-color: #387f38;
+}
+
+.btn-success:hover {
+	color: white;
+    background-color: #449d44;
+}
+
+.astro-download-btn {
+	display:  table;
+	margin:  0 auto;
+}

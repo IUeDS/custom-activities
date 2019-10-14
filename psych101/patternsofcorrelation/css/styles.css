@@ -1,0 +1,283 @@
+/* ensure that all widths are as specified, nothing extra added from padding/margin */
+*, *:before, *:after {
+  /* Chrome 9-, Safari 5-, iOS 4.2-, Android 3-, Blackberry 7- */
+  -webkit-box-sizing: border-box; 
+
+  /* Firefox (desktop or Android) 28- */
+  -moz-box-sizing: border-box;
+
+  /* Firefox 29+, IE 8+, Chrome 10+, Safari 5.1+, Opera 9.5+, iOS 5+, Opera Mini Anything, Blackberry 10+, Android 4+ */
+  box-sizing: border-box;
+}
+
+body {
+    padding: 30px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.column-question, .column-feedback, .column-d3, .column-table {
+    float: left;
+    padding-right: 20px;
+}
+
+.column-question {
+    width: 45%;
+    padding-bottom: 30px;
+    min-width: 450px; /* match the d3 chart below so they line up in columns */
+}
+
+.column-feedback {
+    width: 45%;
+}
+
+.column-d3 {
+    width: 45%;
+    min-width: 450px;
+}
+
+.column-table {
+    width: 45%;
+}
+
+.start-button {
+    color: white;
+    background-color: #5CB85C;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    width: 210px;
+}
+
+.start-button:hover, 
+.submit:hover, 
+.reset-data:hover, 
+.restart:hover,  
+.continue:hover
+/* .feedback:hover,*/ {
+    cursor: pointer;
+}
+
+.question-area {
+    height: 50%;
+    padding: 30px 0px;
+}
+
+.progress-area {
+    height: 50%;
+}
+
+.feedback {
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    /*width: 210px;*/
+    background-color: #F7CC89;
+    /*visibility: hidden;*/
+    display: none;
+    float: left;
+    clear: right;
+}
+
+.reset-data, 
+.submit, 
+.continue {
+    float: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.submit,
+.continue {
+    margin-left: 30px;
+}
+
+.submit {
+    width: 100px;
+    /*background-color: #CCC;*/
+    background-color: #5CB85C;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.continue {
+    /*display: none;*/
+    width: 100px;
+    background-color: #5CB85C;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.continue:hover,
+.submit:hover {
+    background-color: #398439;
+}
+
+.reset-data {
+    width: 100px;
+    background-color: #C9302C;
+    color: white;;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.score-area {
+    width: 210px;
+    clear: both;
+    padding: 20px;
+    border: solid black 2px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.visible {
+    display: inherit;
+}
+
+.hidden {
+    display: none;
+}
+
+.restart {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.restart:hover {
+    cursor: pointer;
+}
+
+.table table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 70px;
+}
+
+.table table td {
+    border: solid 2px black;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.table table thead {
+    color: white;
+    background-color: steelblue;
+}
+
+.table table tbody td:first-child {
+    background-color: #e7f5f9;
+    width: 20%;
+}
+
+.invalid {
+    background-color: #FFDA5C !important;
+}
+
+.fa {
+    position: absolute;
+    right: 5px;
+    top: 9px;
+    color: red;
+}
+
+/*.table table tbody td:nth-child(2), .table table tbody td:nth-child(3) {
+    padding: 20px;
+}*/
+
+/* clearfix */
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+.inactive {
+    background-color: #EEE !important;
+    fill: #EEE !important;
+}
+
+.active {
+    background-color: white;
+}
+
+.button-inactive {
+    background-color: #CCC;
+    color: black;
+}
+
+.button-inactive:hover {
+    cursor: auto;
+    background-color: #CCC;
+    color: black;
+}
+
+.correlation {
+    color: red;
+    padding: 10px;
+    text-align: left;
+    height: 50px;
+}
+
+.final-score {
+    font-size: 24px;
+    padding: 20px;
+    display: table;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.popover {
+    width: 150px;
+}
+
+/* D3 */
+
+.axis {
+  font: 16px sans-serif;
+}
+
+.axis .title {
+    font-weight: 700;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.grid .tick {
+    stroke: #777;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+.grid path {
+    stroke-width: 0;
+}
+
+.dot {
+    fill:lightblue;
+    stroke:#999999;
+}
+
+#chart-background {
+    fill: white;
+}

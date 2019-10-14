@@ -1,0 +1,24 @@
+<div *ngFor="let question of questions">
+	<div [innerHtml]="question.htmlBeforeQuestion | safeHtml"></div>
+	<lab-mc-question *ngIf="question.questionType === 'multiple-choice'" 
+		[question]="question"
+		(responseSubmitted)="onResponseSubmitted($event)">	
+	</lab-mc-question>
+
+	<lab-numerical-question *ngIf="question.questionType === 'numerical'"
+		[question] = "question"
+		(responseSubmitted)="onResponseSubmitted($event)">
+	</lab-numerical-question>
+
+	<lab-single-dropdown-question *ngIf="question.questionType === 'single-dropdown'"
+		[question] = "question"
+		(responseSubmitted)="onResponseSubmitted($event)">
+	</lab-single-dropdown-question>
+
+	<lab-table-question *ngIf="question.questionType === 'table'"
+		[question] = "question"
+		(responseSubmitted)="onResponseSubmitted($event)">
+	</lab-table-question>
+
+	<div *ngIf="question.htmlAfterQuestion" [innerHtml]="question.htmlAfterQuestion | safeHtml"></div>
+</div>

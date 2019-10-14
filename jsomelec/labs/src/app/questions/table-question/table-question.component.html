@@ -1,0 +1,35 @@
+<div [innerHtml]="question.questionText | safeHtml"></div>
+<table [ngClass]="question.tableClass">
+	<tr *ngFor="let question of question.questions">
+		<td *ngIf="question.tableProps?.hasLeftColumn">
+			<span [innerHtml]="question.tableProps.leftColumnHtml | safeHtml"></span>
+		</td>
+		<td class="table-align-left"
+			[attr.style]="question.tableProps?.questionColumnStyles | safeStyle">
+			<div [innerHtml]="question.htmlBeforeQuestion | safeHtml"></div>
+			<lab-mc-question *ngIf="question.questionType === 'multiple-choice'" 
+				[question]="question"
+				(responseSubmitted)="onResponseSubmitted($event)">	
+			</lab-mc-question>
+
+			<lab-numerical-question *ngIf="question.questionType === 'numerical'"
+				[question] = "question"
+				(responseSubmitted)="onResponseSubmitted($event)">
+			</lab-numerical-question>
+
+			<lab-single-dropdown-question *ngIf="question.questionType === 'single-dropdown'"
+				[question] = "question"
+				(responseSubmitted)="onResponseSubmitted($event)">
+			</lab-single-dropdown-question>
+
+			<div *ngIf="question.htmlAfterQuestion" [innerHtml]="question.htmlAfterQuestion | safeHtml"></div>
+		</td>
+		<td *ngIf="question.tableProps?.hasImageColumn" 
+			[attr.rowspan]="question.tableProps.imageColumnRowspan" 
+			[attr.style]="question.tableProps.imageColumnStyles | safeStyle">
+
+			<span [innerHtml]="question.tableProps.imageColumnHtml | safeHtml"></span>
+
+		</td>
+	</tr>
+</table>
