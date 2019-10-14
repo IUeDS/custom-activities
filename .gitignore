@@ -1,0 +1,9 @@
+jsomelec/A212/turntable/
+jsomelec/A212/belmont/
+.DS_Store
+Thumbs.db
+_notes/
+node_modules/
+jsomelec/labs/dist/
+plugintest/
+*.capx.*
