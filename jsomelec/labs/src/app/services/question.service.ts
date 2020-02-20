@@ -4721,7 +4721,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 			        </div>
 			        <div class="image_left image_row">
 			            <a href="${this.a111RootUrl}/A112/img/unit08/labs/figure3.png" target="new">
-			            	<img src="${this.a111RootUrl}/A112/img/unit08/labs/figure3.png"  alt="photo" width="175" height="215" class="image_border"  style=" display:inline-block"/>
+			            	<img src="${this.a111RootUrl}/A112/img/unit08/labs/figure3.png"  alt="photo" width="350" height="215" class="image_border"  style=" display:inline-block"/>
 			            </a>
 			        </div>
 			        <div class="image_left image_row">
@@ -4732,7 +4732,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 			        <div class="line_break"></div>
 			        <h2>FAKING THE POWER LINE</h2>
 			         <p>Remember that an oscilloscope is a voltmeter, so it needs two connections in order to measure. <br>
-			         This oscillscope, like many, has two channels so you can measure two things at once. </p>
+			         This oscilloscope, like many, has two channels so you can measure two things at once. </p>
 			         <p>Each of those channels has two connections: </p>
 			         <ul>
 			           <li>Positive connection: Each channel has two possible positive connections. They are &quot;AC&quot; and &quot;DC&quot;.
@@ -4747,10 +4747,10 @@ In addition to your lab kit you will need something to play some music, a phone 
 			        <ul>
 			        	<li>Set the time division and trigger:
 			          		<ol type="a">
-			            		<li>Press the &quot;MENU&quot; button on the oscillscope until you see no text displayed at the bottom of the screen.</li>
+			            		<li>Press the &quot;MENU&quot; button on the oscilloscope until you see no text displayed at the bottom of the screen.</li>
 			            		<li>Press either the far right (decrease value) or middle (increase value) buttons until the top of the display says &quot;<span class="scopefont">5 mS/div</span>&quot;</li>
 			            		<li>Press the &quot;MENU&quot; button until you see &quot;<span class="scopefont">TRIGTYPE&nbsp;&nbsp;&nbsp;&nbsp;TRIGSRC&nbsp;&nbsp;&nbsp;&nbsp;MORETRIG</span>&quot;</li>
-			            		<li>Press the button under &quot;<span class="scopefont">TRIGTYPE</span>&quot; and the press the buton under  &quot;<span class="scopefont">AUTO</span>&quot;</li>
+			            		<li>Press the button under &quot;<span class="scopefont">TRIGTYPE</span>&quot; and the press the button under  &quot;<span class="scopefont">AUTO</span>&quot;</li>
 			          		</ol>
 			        	</li>
 			        	<li>Set the channel settings:
@@ -4758,7 +4758,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 			            		<li>Press the &quot;MENU&quot; button until you see &quot;<span class="scopefont">Ch1&nbsp;&nbsp;&nbsp;Ch2&nbsp;&nbsp;&nbsp;&nbsp;LOGIC</span>&quot; at the bottom of the display. </li>
 			            		<li>Press the button under &quot;<span class="scopefont">Ch1</span>&quot; and you will get the menu choices &quot;<span class="scopefont">CH ON&nbsp;&nbsp;&nbsp;&nbsp;GAIN-&nbsp;&nbsp;&nbsp;&nbsp;GAIN+</span>&quot;</li>
 			            		<li>Press the button under <span class="scopefont">GAIN-&nbsp;</span> or&nbsp;<span class="scopefont">&nbsp;GAIN+</span> until the screen shows &quot;5.12V.div&quot; at the top right.</li>
-			            		<li>Press the &quot;MENU&quot; button again to see &quot;<span class="scopefont">POSITION&nbsp;&nbsp;&nbsp;&nbsp;INVERT&nbsp;&nbsp;&nbsp;&nbsp;MATH</span>&quot; (<em>you may have to go back throgh the choices&quot;</em></li>
+			            		<li>Press the &quot;MENU&quot; button again to see &quot;<span class="scopefont">POSITION&nbsp;&nbsp;&nbsp;&nbsp;INVERT&nbsp;&nbsp;&nbsp;&nbsp;MATH</span>&quot; (<em>you may have to go back through the choices&quot;</em></li>
 			            		<li>Press the button under &quot;<span class="scopefont">POSITION</span>&quot; and use  <span class="scopefont">MOVE-&nbsp;</span> or&nbsp;<span class="scopefont">&nbsp;MOVE+</span> until the line across the screen
 			              is in the middle (there is a &quot;+&quot; in he center of the screen).</li>
 			          		</ol>
@@ -4782,16 +4782,17 @@ In addition to your lab kit you will need something to play some music, a phone 
 			        		</ol>
 			        	</li>
 			        </ul>
-			       <p><strong>5a</strong>. Connect the secondary of the transformer to the oscilloscope so you can measure the voltage out.</p>
+			       <p><strong>5a</strong>. Connect the secondary of the transformer to the oscilloscope (and GND) so you can measure the voltage out. Draw the Schematic symbol for a transformer and think about how it should be connected.</p>
 			       <p><em>Remember that there are two connections needed for the Oscilloscope, one is GND and the other is either the &quot;AC&quot; or &quot;DC&quot; connection. &quot;AC&quot; allows you to only see AC, while &quot;DC&quot; allows you to see AC+DC.</em></p>
 			       <p><strong>5b</strong>. Adjust the &quot;Amplifier Level&quot; control until so that it is as large as possible without any clipping. </p>
 			       <p><em>Clipping is when the top (or bottom) of the sine wave is flattened off.</em></p>
+             <p><strong>Once you have a &quot;not-clipping&quot; waveform, <em>dis-connect the oscillscope from the transformer</em>.</strong></p>
 			       <div class="line_break"></div>
 					<h2>BUILD IT</h2>
 					<div class="image_right">
 						<img src="${this.a111RootUrl}/A112/img/unit08/labs/schem1.png" alt="" width="500" height="200" class="image_border"/>
 					</div>
-					<p>You are about to build the circuit shown in the figure 1-6 schematic.</p>
+					<p>You are about to build the circuit shown in the figure 1-6 schematic. <strong><em>Note that the connection from the transformer to the oscilloscope you added in step 5b is no longer connected!</em></strong></p>
  				`,
  				'questionText': `
   						<p><strong>Question #1: What do you expect to see on the oscilloscope across R1?</strong></p>
@@ -4835,7 +4836,7 @@ In addition to your lab kit you will need something to play some music, a phone 
  			},
  			{
  				'htmlBeforeQuestion': `
-					<p><strong>6</strong>. Now go ahead and build the circuit shown in figure 1-7 on your breadboard. <strong>Connect the oscilloscope chane 1 (DC) so that it measures the voltage across R1.</p>
+					<p><strong>6</strong>. Now go ahead and build the circuit shown in figure 1-7 on your breadboard. <strong>Connect the oscilloscope channel 1 (DC) so that it measures the voltage across R1.</p>
 					<div class="image_right">
 			        	<img src="${this.a111RootUrl}/A112/img/unit08/labs/schem1.png" alt="" width="500" height="200" class="image_border"/>
 			        </div>
