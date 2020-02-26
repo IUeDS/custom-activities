@@ -6448,6 +6448,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 			            <li>Set the DC bias by adjusting the &ldquo;Var +/-&ldquo;  control.</li>
 			          </ol>
 			          <p><strong>Question #39: Draw  what you see on the oscilloscope on a scrap of paper.</strong></p>
+                <p><em>If you see only a flat line on the oscilloscope, increase the AC voltage (using the potentiometer) until you see a reading. You will adjust in the next step to get a &quot;clean&quot; sine wave.</em></p>
 			          <div class="question_and_answer_full">
 			            <div class="question_button">
 			              <div class="question_button_header">Click here<br>
@@ -6458,6 +6459,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 			              <div class="revealed_answer_header">Answer: </div>
 			              <div class="image_holder no_caption">
 			              	<img class="image_center" src="${this.a111RootUrl}/A112/img/unit09/labs/scopebalclip.jpg">
+                      <p>Exactly what you see here will depend a lot on the exact values of DC BIas and AC source you have selected. As long as you see a repeating waveform, move ahead.</p>
 			              </div>
 			              <!-- end of revealed_answer div -->
 			            </div>
