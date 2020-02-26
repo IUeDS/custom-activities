@@ -5971,9 +5971,9 @@ In addition to your lab kit you will need something to play some music, a phone 
 			          </a>
 			        </div>
 			        <p>Parts needed (shown in figure 1-1): 2n3904 NPN transistor,4.7uF non-polarized capacitor, 2-10kΩ resistors, 1.2kΩ  resistor.(<em>Click on the image for a larger view.</em>)</p>
-			        <p>In the last lab you experimented with current flow through transistors. In most cases other circuits we would connect to a transistor would require a change in voltage, not
+			        <p>In the last lab you experimented with current flow through transistors. In most cases, other circuits that would be connected to a transistor would require a change in voltage, not
 			          just a change in current. If we change the voltage at the base we get a varying current through the collector/emitter. If we have a varying current and want a varying voltage what component would we add?</p>
-					<p>Yes, a resistor! (<em>I&rsquo;m going to pretend that you gave the correct answer.</em>)</p>
+					<p>Yes, a resistor! (<em>I&rsquo;m going to pretend :-) that you gave the correct answer.</em>)</p>
 			        <div class="line_break"></div>
 			          <div class="image_right">
 			          	<a href="${this.a111RootUrl}/A112/img/unit09/labs/9_1-1.png" target="new"><img src="${this.a111RootUrl}/A112/img/unit09/labs/9_1-1.png" alt="" width="226" height="300" class="image_border"/></a>
@@ -6436,7 +6436,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 						'low': 1.51,
 						'high': 2,
 						'correct': false,
-						'feedback': `This is WAY too high. Check your measurements and circuit.`
+						'feedback': `This is WAY too high. Check your measurements and circuit. Remember that you want this value to be halfway between your saturation and cutoff values.`
 					},
  				]
  			},
