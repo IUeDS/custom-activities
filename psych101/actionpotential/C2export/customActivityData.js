@@ -7,42 +7,58 @@ function CustomActivityData() {
       }
     });
 
+    // class member variables
+    this.apiToken = null;
     this.queryParams = $.getQueryParameters();
     this.assessmentId = this.queryParams.id;
     this.isPreview = this.queryParams.preview ? this.queryParams.preview : false;
-    this.attemptId = '';
+    this.attemptId = this.queryParams.attemptId;
+    this.nonce = this.queryParams.nonce;
+    this.studentStorageTokenKey = 'iu-eds-qc-student-token';
     this.APIBaseUrl = '/index.php/api/';
     this.initAttemptEndpoint = this.APIBaseUrl + "attempt/" + this.assessmentId;
     this.gradePassbackEndpoint = this.APIBaseUrl + "grade/passback";
-    //the next two endpoints need attempt ID, not fetched until later, so appended when making the call
+    // the next two endpoints need attempt ID, not fetched until later, so appended when making the call
     this.updateAttemptEndpoint = this.APIBaseUrl + "attempt/update/";
     this.insertResponseEndpoint = this.APIBaseUrl + "response/";
 
-    //the above API Base url should work fine on both production and webtest, but not locally;
-    //rather than a whole bunch of environment hassle, just going to check for localhost and adjust accordingly
+    // the above API Base url should work fine in any webserve environment, but not locally;
+    // rather than a whole bunch of environment hassle, just going to check for localhost and adjust accordingly
     if (window.location.href.indexOf('localhost') !== -1) {
         this.APIBaseUrl = '/api/';
     }
 
+    // class functions
     this.apiInitAttempt = apiInitAttempt;
     this.apiUpdateAttempt = apiUpdateAttempt;
     this.apiInsertResponse = apiInsertResponse;
     this.apiGradePassback = apiGradePassback;
     this.appendErrorModals = appendErrorModals;
     this.appendErrorModal = appendErrorModal;
+    this.getApiTokenFromStorage = getApiTokenFromStorage;
     this.getServerError = getServerError;
     this.showAttemptErrorModal = showAttemptErrorModal;
     this.showResponseErrorModal = showResponseErrorModal;
     this.showInitErrorModal = showInitErrorModal;
-    this.showThirdPartyCookiesModal = showThirdPartyCookiesModal;
     this.showGradeErrorModal = showGradeErrorModal;
+    this.storageAvailable = storageAvailable;
+    this.storeStudentToken = storeStudentToken;
 
-    //init
+    // init
     this.appendErrorModals();
 
+    // initialize an attempt for a custom activity, obtaining an attempt ID from server
+    // parameters:
+    //  - params, a JSON object or JSON string (not needed in most cases, but
+    //    was used previously for edge cases like P101 mouseover activities)
+    //  - callback, a function to be called after attempt init success
+    // returns:
+    //  - false on error, otherwise, void
     function apiInitAttempt(params, callback) {
-        var initData = { 'preview': this.isPreview },
+        var initData = { 'preview': this.isPreview, 'attemptId': this.attemptId, 'nonce': this.nonce },
             that = this;
+
+        this.apiToken = this.getApiTokenFromStorage();
 
         //if no assessment id for query parameter, then no data tracking possible, return false
         if (!this.assessmentId) {
@@ -51,16 +67,30 @@ function CustomActivityData() {
             return false;
         }
 
+        var headers = {};
+
+        if (this.apiToken) {
+            headers['Authorization'] = 'Bearer ' + this.apiToken;
+        }
+
         $.ajax({
             type: 'POST',
             url: that.initAttemptEndpoint,
             data: initData,
             dataType: "json",
+            headers: headers,
             success: function(data) {
                 //not sure why, but dot notation worked fine in plain JS, but in C2, it showed up
                 //as undefined unless I used string notation instead for the nested object key.
                 //maybe a quirk of the minifying compiler that C2 uses?
                 that.attemptId = data.data['attemptId'];
+                var apiToken = data.data['apiToken'];
+
+                if (apiToken) {
+                    that.apiToken = apiToken;
+                    that.storeStudentToken(apiToken);
+                }
+
                 if (callback) {
                     callback();
                 }
@@ -74,6 +104,12 @@ function CustomActivityData() {
         });
     };
 
+    // update a student's attempt (such as incrementing count correct, new milestone, etc.)
+    // parameters:
+    //  - params, a JSON object or JSON string (includes countCorrect, etc.).
+    //  - callback, a function to be called after update attempt success
+    // returns:
+    //  - boolean, false on error, true on success
     function apiUpdateAttempt(params, callback) {
         var that = this;
 
@@ -111,6 +147,11 @@ function CustomActivityData() {
         });
     }
 
+    // pass a grade back after activity completion
+    // parameters:
+    //  - callback, a function to be called after grade passback success
+    // returns:
+    //  - false on error, void on success
     function apiGradePassback(callback) {
         var that = this,
             params = { 'attemptId': that.attemptId };
@@ -137,6 +178,12 @@ function CustomActivityData() {
         });
     }
 
+    // record a student response to a question
+    // parameters:
+    //  - params, a JSON object or JSON string (includes answerKey, etc.).
+    //  - callback, a function to be called after insert response success
+    // returns:
+    //  - boolean, false on error, true on success
     function apiInsertResponse(params, callback) {
         var that = this;
 
@@ -163,15 +210,15 @@ function CustomActivityData() {
         });
     };
 
-    //append a modal to the html page that will be activated for grade passback errors
+    //append modals to the html page that will be activated for grade passback errors
     function appendErrorModals() {
         appendErrorModal('apiInitErrorModal', 'Error initializing your session.');
         appendErrorModal('apiAttemptErrorModal', 'Error updating your attempt.');
         appendErrorModal('apiResponseErrorModal', 'Error recording your response.');
         appendErrorModal('apiGradeErrorModal', 'Error updating grade.');
-        appendErrorModal('thirdPartyCookiesModal', 'Error initializing your assessment. Please make sure that third party cookies have been enabled in your browser and refresh the page. For instructions, <a href="https://kb.iu.edu/d/ajfi" target="_blank">read the KB article.</a>');
     }
 
+    //append an error modal type
     function appendErrorModal(id, message) {
         $('body').append('<div class="modal fade" id="' + id + '" tabindex="-1" role="alertdialog" aria-labelledby="' + id + 'Label">' +
               '<div class="modal-dialog" role="document">' +
@@ -188,6 +235,15 @@ function CustomActivityData() {
             '</div>');
     }
 
+    function getApiTokenFromStorage() {
+        if (!this.storageAvailable('sessionStorage')) {
+            return this.apiToken;
+        }
+
+        return sessionStorage.getItem(this.studentStorageTokenKey);
+    }
+
+    //convert server response to a readable error message, if available
     function getServerError(jqXHR) {
         var errorString = jqXHR.responseText,
             errorJson = JSON.parse(errorString);
@@ -204,12 +260,12 @@ function CustomActivityData() {
     }
 
     function showAttemptErrorModal(errorDetails) {
-        $('#apiAttemptErrorModal .error-details').text(errorDetails);
+        $('#apiAttemptErrorModal .error-details').html(errorDetails);
         $('#apiAttemptErrorModal').modal({backdrop: 'static', keyboard: false});
     }
 
     function showGradeErrorModal(errorDetails, callback) {
-        $('#apiGradeErrorModal .error-details').text(errorDetails);
+        $('#apiGradeErrorModal .error-details').html(errorDetails);
         $('#apiGradeErrorModal').modal({backdrop: 'static', keyboard: false});
         if (!$('#apiGradeRetryBtn').length) {
             var that = this;
@@ -226,16 +282,48 @@ function CustomActivityData() {
     }
 
     function showResponseErrorModal(errorDetails) {
-        $('#apiResponseErrorModal .error-details').text(errorDetails);
+        $('#apiResponseErrorModal .error-details').html(errorDetails);
         $('#apiResponseErrorModal').modal({backdrop: 'static', keyboard: false});
     }
 
     function showInitErrorModal(errorDetails) {
-        $('#apiInitErrorModal .error-details').text(errorDetails);
+        $('#apiInitErrorModal .error-details').html(errorDetails);
         $('#apiInitErrorModal').modal({backdrop: 'static', keyboard: false});
     }
 
-    function showThirdPartyCookiesModal() {
-        $('#thirdPartyCookiesModal').modal({backdrop: 'static', keyboard: false});
+    //source: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#Testing_for_availability
+    function storageAvailable(type) {
+        var storage;
+        try {
+            storage = window[type];
+            var x = '__storage_test__';
+            storage.setItem(x, x);
+            storage.removeItem(x);
+            return true;
+        }
+        catch(e) {
+            return e instanceof DOMException && (
+                // everything except Firefox
+                e.code === 22 ||
+                // Firefox
+                e.code === 1014 ||
+                // test name field too, because code might not be present
+                // everything except Firefox
+                e.name === 'QuotaExceededError' ||
+                // Firefox
+                e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+                 // acknowledge QuotaExceededError only if there's something already stored
+                (storage && storage.length !== 0);
+       }
+    }
+
+    function storeStudentToken(token) {
+        this.apiToken = token;
+
+        if (!this.storageAvailable('sessionStorage')) {
+            return;
+        }
+
+        sessionStorage.setItem(this.studentStorageTokenKey, this.apiToken);
     }
 }
