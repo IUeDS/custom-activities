@@ -1,0 +1,29 @@
+<div cdkDropListGroup class="qc-drag-question">
+  <div class="qc-droppable-container">
+    <img class="qc-droppable-base-img" [src]="this.baseImageUrl" />
+    <div cdkDropList
+      *ngFor="let droppable of this.droppables"
+      [id]="droppable.id"
+      [cdkDropListData]="droppables"
+      (cdkDropListDropped)="dropOntoAnswer($event)"
+      class="qc-droppable-zone"
+      [ngClass]="droppable.disabled ? 'qc-droppable-disabled' : null"
+      [ngStyle]="{'top.px': getDroppableTopPosition(droppable), 'left.px': getDroppableLeftPosition(droppable), 'width.px': droppable.width, 'height.px': droppable.height}">
+      <img *ngIf="droppable.imgUrl" [src]="droppable.imgUrl" cdkDrag />
+    </div>
+  </div>
+  <div cdkDropList
+    [cdkDropListData]="draggables"
+    (cdkDropListDropped)="dropOutsideOfAnswer($event)"
+    class="drag-option-list">
+    <div *ngFor="let draggable of this.draggables" 
+      cdkDrag
+      class="qc-draggable"
+      [ngStyle]="{'width.px': draggable.width, 'height.px': draggable.height}">
+      <img [src]="draggable.imgUrl" />
+    </div>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>

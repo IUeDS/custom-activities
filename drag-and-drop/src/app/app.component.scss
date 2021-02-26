@@ -1,0 +1,26 @@
+.qc-droppable-zone {
+    position: absolute;
+    z-index: 10;
+    //border: dashed 2px gray;
+}
+
+.qc-droppable-base-img {
+    z-index: 1;
+}
+
+.qc-droppable-zone.cdk-drop-list-receiving {
+    border: dashed 2px gray;
+}
+
+.qc-droppable-zone.cdk-drop-list-receiving.qc-droppable-disabled {
+    border: none;
+}
+
+.qc-droppable-container {
+    position: relative;
+}
+
+.qc-drag-question {
+    padding: 100px;
+}
+
