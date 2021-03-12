@@ -1,16 +1,26 @@
-<p class="qc-assessment-question">{{ this.question_text }}</p>
+<p class="qc-assessment-question">{{ this.currentQuestion.question_text }}</p>
 <div cdkDropListGroup class="qc-drag-question">
   <div class="qc-droppable-container">
-    <img class="qc-droppable-base-img" [src]="this.baseImageUrl" />
-    <div cdkDropList
-      *ngFor="let droppable of this.droppables"
-      [id]="droppable.id"
-      [cdkDropListData]="droppables"
-      (cdkDropListDropped)="dropOntoAnswer($event)"
-      class="qc-droppable-zone"
-      [ngClass]="droppable.disabled ? 'qc-droppable-disabled' : null"
-      [ngStyle]="{'top.px': getDroppableTopPosition(droppable), 'left.px': getDroppableLeftPosition(droppable), 'width.px': droppable.width, 'height.px': droppable.height}">
-      <img *ngIf="droppable.imgUrl" [src]="droppable.imgUrl" cdkDrag />
+    <img class="qc-droppable-base-img" [src]="this.image.imgUrl" [width]="this.image.width" [height]="this.image.height" />
+    <div *ngFor="let droppable of this.getDroppables()">
+      <div cdkDropList
+        [id]="droppable.id"
+        [cdkDropListData]="droppable[this.DRAG_TYPE]"
+        (cdkDropListDropped)="dropOntoAnswer($event)"
+        (cdkDropListEntered)="droppableEntered($event)"
+        (cdkDropListExited)="droppableExited($event)"
+        class="qc-droppable-zone"
+        [ngClass]="{'qc-droppable-disabled': droppable.disabled ? true : false, 'qc-droppable-zone-entered': droppable.entered ? true : false, 'qc-dropped-option': droppable.imgUrl ? true : false}" 
+        [ngStyle]="{'top.px': getDroppableTopPosition(droppable), 'left.px': getDroppableLeftPosition(droppable), 'width.px': droppable.width, 'height.px': droppable.height}"
+        >
+          <img *ngIf="droppable[this.DRAG_TYPE].length"
+            cdkDrag
+            class="qc-dropped-option"  
+            [src]="droppable[this.DRAG_TYPE][0].imgUrl" 
+            [width]="droppable[this.DRAG_TYPE][0].width" 
+            [height]="droppable[this.DRAG_TYPE][0].height"
+          />
+      </div>
     </div>
   </div>
   <div cdkDropList
@@ -19,14 +29,14 @@
     (cdkDropListDropped)="dropOutsideOfAnswer($event)"
     (cdkDropListEntered)="optionListDragEntered($event)"
     (cdkDropListExited)="optionListDragExited($event)"
-    [ngClass]="{'qc-drag-option-list-entered': this.dragListHighlighted}"
+    [ngClass]="{'qc-droppable-zone-entered': this.dragListHighlighted}"
     class="qc-drag-option-list">
     <div *ngFor="let draggable of this.draggables; index as i" 
       cdkDrag
       class="qc-draggable"
       [ngClass]="{'qc-duplicate-drag-option': draggable.count > 1 ? true : false}"
       [ngStyle]="{'width.px': draggable.width, 'height.px': draggable.height}">
-      <img [src]="draggable.imgUrl" />
+      <img [src]="draggable.imgUrl" [width]="draggable.width" [height]="draggable.height" />
     </div>
   </div>
 </div>
