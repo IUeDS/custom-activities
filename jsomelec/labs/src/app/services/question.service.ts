@@ -6663,7 +6663,7 @@ In addition to your lab kit you will need something to play some music, a phone 
  				'options': [
  					{
 						'low': 0,
-						'high': 109.9,
+						'high': 64.9,
 						'correct': false,
 						'feedback': `
 							This is too low. You should have had an output of around 4.6V<sub>PK-PK</sub>. Divide that by the 39.6mV<sub>PK-PK</sub> input and you
@@ -6672,7 +6672,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 						`
 					},
 					{
-						'low': 110,
+						'low': 65,
 						'high': 114.9,
 						'correct': false,
 						'feedback': `
@@ -6691,7 +6691,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 					},
 					{
 						'low': 119.1,
-						'high': 130,
+						'high': 150,
 						'correct': false,
 						'feedback': `
 							This seems high, but may be a good answer. You should have had an output of around 4.6V<sub>PK-PK</sub>. Divide that by the 39.6mV<sub>PK-PK</sub>
@@ -6700,7 +6700,7 @@ In addition to your lab kit you will need something to play some music, a phone 
 						`
 					},
 					{
-						'low': 130.1,
+						'low': 150.1,
 						'high': 10000,
 						'correct': false,
 						'feedback': `
