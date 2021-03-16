@@ -14,6 +14,24 @@
     border: dashed 2px gray;
 }
 
+.qc-droppable-incorrect img {
+    //border: dashed 2px #900 !important;
+    //background-color: rgba(211, 61, 55, 0.2);
+    animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    50% {
+      background-color: rgba(211, 61, 55, 0.3);
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
 .qc-droppable-zone.cdk-drop-list-receiving.qc-droppable-disabled,
 .qc-droppable-zone.cdk-drop-list-dragging.qc-droppable-disabled {
     border: none;
@@ -65,8 +83,125 @@
     transform: translate(-50%, -50%);
 }
 
+/*.qc-dropped-option-incorrect {
+    z-index: 60;
+    //center vertically and horizontally
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: red; 
+    font-size: 25px; 
+    //position: absolute;
+}*/
+
 //temp, question text styles defined by QC
 .qc-assessment-question {
     padding: 20px;
     font-size: 1.5em;
+}
+
+//copied from QC styles for buttons
+$neutral-gray: #e5e5e5;
+$dark-gray: #ccc;
+$iron-gray: #333;
+$restart-red: #b71a1a;
+$seafoam-green: #84d0a5;
+$seafoam-green-darker: #6ec895;
+$white: #fff;
+$black: #000;
+
+.qc-assessment-button-area {
+    float: left;
+    margin-top: 30px;
+    width: 35%;
+    font-family: 'Arial', sans-serif;
+    margin-left: 30px;
+    font-weight: 400;
+    line-height: 2;
+
+    button {
+        font-size: 1em;
+    }
+}
+
+//gray button to click to restart
+.qc-btn-restart-assessment {
+    background-color: $neutral-gray;
+
+    &:hover,
+    &:focus {
+        background-color: $dark-gray;
+    }
+}
+
+.qc-current-score,
+.qc-submit-response,
+.qc-restart {
+    border: 0;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    clear: left;
+    float: left;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    letter-spacing: .05em;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: left;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: 90%;
+}
+
+.qc-current-score {
+    background-color: $neutral-gray;
+}
+
+#qc-completion-modal,
+#qc-feedback-modal {
+    h2 { //don't capitalize h2 in modal
+        text-transform: none;
+    }
+}
+
+//visual indication of focus for buttons
+.qc-restart,
+.qc-submit-response,
+.qc-continue-btn,
+.qc-row-continue-btn,
+.qc-btn-restart-assessment {
+    &:focus {
+        border: solid $iron-gray 3px;
+    }
+}
+
+.qc-restart {
+    background-color: $restart-red;
+    color: $white;
+
+    &:hover {
+        color: $dark-gray;
+        cursor: pointer;
+    }
+}
+
+.qc-submit-response {
+    background-color: $seafoam-green;
+    color: $black;
+    margin-bottom: 30px;
+
+    &:hover {
+        background-color: $seafoam-green-darker;
+        cursor: pointer;
+    }
+
+    &:disabled {
+        background-color: $neutral-gray;
+
+        &:hover {
+            color: $black;
+            cursor: not-allowed;
+        }
+    }
 }

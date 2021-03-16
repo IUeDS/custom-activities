@@ -10,8 +10,18 @@
         (cdkDropListEntered)="droppableEntered($event)"
         (cdkDropListExited)="droppableExited($event)"
         class="qc-droppable-zone"
-        [ngClass]="{'qc-droppable-disabled': droppable.disabled ? true : false, 'qc-droppable-zone-entered': droppable.entered ? true : false, 'qc-dropped-option': droppable.imgUrl ? true : false}" 
-        [ngStyle]="{'top.px': getDroppableTopPosition(droppable), 'left.px': getDroppableLeftPosition(droppable), 'width.px': droppable.width, 'height.px': droppable.height}"
+        [ngClass]="{
+          'qc-droppable-disabled': droppable.disabled ? true : false, 
+          'qc-droppable-zone-entered': droppable.entered ? true : false, 
+          'qc-dropped-option': droppable.imgUrl ? true : false,
+          'qc-droppable-incorrect': droppable.incorrect ? true : false 
+        }" 
+        [ngStyle]="{
+          'top.px': getDroppableTopPosition(droppable), 
+          'left.px': getDroppableLeftPosition(droppable), 
+          'width.px': droppable.width, 
+          'height.px': droppable.height
+        }"
         >
           <img *ngIf="droppable[this.DRAG_TYPE].length"
             cdkDrag
@@ -20,6 +30,13 @@
             [width]="droppable[this.DRAG_TYPE][0].width" 
             [height]="droppable[this.DRAG_TYPE][0].height"
           />
+          <!--
+          <span *ngIf="droppable.incorrect" 
+            class="qc-dropped-option-incorrect"
+          >
+            X
+          </span>
+          -->
       </div>
     </div>
   </div>
@@ -40,6 +57,11 @@
     </div>
   </div>
 </div>
-
+<div class="qc-assessment-button-area">
+  <button class="qc-submit-response" [disabled]="this.isSubmitDisabled()" (click)="this.submitAnswer()" type="submit">Submit</button>
+  <!-- not sure yet if we're doing one question or multiple, leaving score out for now -->
+  <!--<div class="qc-current-score" aria-live="assertive" aria-atomic="true">{{ this.score }} / {{ this.pointsPossible }} questions correct</div>-->
+  <button class="qc-restart" (click)="this.restart()" type="button">Start Over</button>
+</div>
 
 <router-outlet></router-outlet>

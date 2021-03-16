@@ -228,4 +228,28 @@ export class AppComponent {
 
     droppableArea.entered = false;
   }
+
+  isSubmitDisabled() {
+    if (this.draggables.length) {
+      return true;
+    }
+
+    return false;
+  }
+
+  submitAnswer() {
+    let incorrect = false;
+
+    for (let droppable of this.droppables) {
+      if (droppable[this.DRAG_TYPE][0].id != droppable.answer_id) {
+        droppable.incorrect = true;
+        incorrect = true;
+      }
+    }
+  }
+
+  restart() {
+    //hard page refresh to ensure a new attempt is created
+    window.location.reload();
+  }
 }
