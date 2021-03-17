@@ -17,6 +17,8 @@ export class AppComponent {
   draggables = [];
   droppables = [];
   dragListHighlighted = false;
+  feedbackVisible = false;
+  isCorrect = true;
 
   ngOnInit() {
     //this is where we would load in data from the QC API when fully integrated; mocking up for now
@@ -230,7 +232,7 @@ export class AppComponent {
   }
 
   isSubmitDisabled() {
-    if (this.draggables.length) {
+    if (this.draggables.length || this.feedbackVisible) {
       return true;
     }
 
@@ -238,14 +240,14 @@ export class AppComponent {
   }
 
   submitAnswer() {
-    let incorrect = false;
-
     for (let droppable of this.droppables) {
       if (droppable[this.DRAG_TYPE][0].id != droppable.answer_id) {
         droppable.incorrect = true;
-        incorrect = true;
+        this.isCorrect = false;
       }
     }
+
+    this.feedbackVisible = true;
   }
 
   restart() {

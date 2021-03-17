@@ -47,6 +47,7 @@
     (cdkDropListEntered)="optionListDragEntered($event)"
     (cdkDropListExited)="optionListDragExited($event)"
     [ngClass]="{'qc-droppable-zone-entered': this.dragListHighlighted}"
+    *ngIf="!this.feedbackVisible"
     class="qc-drag-option-list">
     <div *ngFor="let draggable of this.draggables; index as i" 
       cdkDrag
@@ -57,8 +58,13 @@
     </div>
   </div>
 </div>
+<div class="qc-drag-feedback" *ngIf="this.feedbackVisible">
+  <h2 *ngIf="this.isCorrect">Correct</h2>
+  <h2 *ngIf="!this.isCorrect">Incorrect<span *ngIf="this.partialCredit">. Partial credit assigned.</span></h2>
+  <h3>Score: {{ this.isCorrect ? 1 : 0 }}/1</h3>
+</div>
 <div class="qc-assessment-button-area">
-  <button class="qc-submit-response" [disabled]="this.isSubmitDisabled()" (click)="this.submitAnswer()" type="submit">Submit</button>
+  <button class="qc-submit-response" [disabled]="this.isSubmitDisabled()" (click)="this.submitAnswer()" *ngIf="!this.feedbackVisible" type="submit">Submit</button>
   <!-- not sure yet if we're doing one question or multiple, leaving score out for now -->
   <!--<div class="qc-current-score" aria-live="assertive" aria-atomic="true">{{ this.score }} / {{ this.pointsPossible }} questions correct</div>-->
   <button class="qc-restart" (click)="this.restart()" type="button">Start Over</button>

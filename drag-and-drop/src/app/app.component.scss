@@ -101,7 +101,7 @@
     font-size: 1.5em;
 }
 
-//copied from QC styles for buttons
+//copied from QC styles for buttons and feedback
 $neutral-gray: #e5e5e5;
 $dark-gray: #ccc;
 $iron-gray: #333;
@@ -110,6 +110,7 @@ $seafoam-green: #84d0a5;
 $seafoam-green-darker: #6ec895;
 $white: #fff;
 $black: #000;
+$ocean-blue-muted: #213c48;
 
 .qc-assessment-button-area {
     float: left;
@@ -205,3 +206,23 @@ $black: #000;
         }
     }
 }
+
+//not directly lifted from QC, but mocking a similar style without using bootstrap
+.qc-drag-feedback {
+    padding: 15px;
+    width: 200px;
+    margin: 50px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,0,0,.125);
+
+    h2 {
+        color: $ocean-blue-muted;
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.9rem;
+        font-weight: 400;
+        line-height: 0.5em;
+        text-transform: uppercase;
+    }
+}
+
