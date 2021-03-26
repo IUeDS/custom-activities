@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, DragRef, moveItemInArray, Point, transferArrayItem} from '@angular/cdk/drag-drop';
+import {transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -120,6 +120,19 @@ export class AppComponent {
     const droppedOption = event.container.data[event.currentIndex];
     this.resetAnswerData(droppedOption);
     this.dragListHighlighted = false;
+
+    //re-sort to make sure options are grouped together by duplicates and in original positions
+    this.draggables.sort((a, b) => {
+      if (a.id < b.id) {
+        return -1
+      }
+
+      if (a.id > b.id) {
+        return 1;
+      }
+
+      return 0;
+    });
   }
 
   //as draggable items are dragged onto the droppable zones, they technically get
@@ -143,23 +156,34 @@ export class AppComponent {
     const droppableId = event.container.id;
     const droppableArea = this.getDroppableById(droppableId);
 
-    //don't allow multiple options to be dragged onto the same droppable area or to drag onto a placed option
-    if (droppableArea[this.DRAG_TYPE].length || droppableArea[this.DROP_TYPE]) {
-      return false;
-    }
-
     transferArrayItem(event.previousContainer.data,
       event.container.data,
       event.previousIndex,
       event.currentIndex);
 
-    //reset linked data if it was used as an answer previously and dropped somewhere else
+
     const droppedOption = event.container.data[event.currentIndex];
+
+    //reset linked data if it was used as an answer previously and dropped somewhere else
     this.resetAnswerData(droppedOption);
 
-    //pin to appropriate center point for droppable zone
-    droppedOption.top = droppableArea.top;
-    droppedOption.left = droppableArea.left;
+    //if moving onto a spot where an option has already been placed 
+    if (droppableArea[this.DRAG_TYPE].length > 1) {
+      let transferOptionIndex = null;
+      let transferDropOption = null;
+
+      for (let [index, option] of droppableArea[this.DRAG_TYPE].entries()) {
+        if (option.id != droppedOption.id) {
+          transferOptionIndex = index;
+          transferDropOption = option;
+        }
+      }
+
+      const previousDroppableId = event.previousContainer.id;
+      const previousDroppableArea = this.getDroppableById(previousDroppableId);
+      previousDroppableArea[this.DRAG_TYPE].push(transferDropOption);
+      transferDropOption[this.DROP_TYPE] = previousDroppableArea;
+    }
 
     //prevent user from dropping multiple options onto the same area
     droppableArea.disabled = true;
@@ -171,6 +195,16 @@ export class AppComponent {
 
     //remove drag-enter styling
     droppableArea.entered = false;
+  }
+
+  getDraggableById(id) {
+    for (const draggable of this.draggables) {
+      if (draggable.id == id) {
+        return draggable;
+      }
+    }
+
+    return null;
   }
 
   getDroppableById(id) {

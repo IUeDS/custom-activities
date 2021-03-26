@@ -83,6 +83,10 @@
     transform: translate(-50%, -50%);
 }
 
+.cdk-drag-animating {
+    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
 /*.qc-dropped-option-incorrect {
     z-index: 60;
     //center vertically and horizontally
