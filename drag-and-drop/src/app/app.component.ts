@@ -122,6 +122,18 @@ export class AppComponent {
     this.dragListHighlighted = false;
 
     //re-sort to make sure options are grouped together by duplicates and in original positions
+    this.sortOptions();
+  }
+
+  //as draggable items are dragged onto the droppable zones, they technically get
+  //converted into droppables; make sure the original list remains intact
+  getDroppables() {
+    return this.droppables.filter(droppable => {
+      return droppable.type === this.DROP_TYPE;
+    })
+  }
+
+  sortOptions() {
     this.draggables.sort((a, b) => {
       if (a.id < b.id) {
         return -1
@@ -133,14 +145,6 @@ export class AppComponent {
 
       return 0;
     });
-  }
-
-  //as draggable items are dragged onto the droppable zones, they technically get
-  //converted into droppables; make sure the original list remains intact
-  getDroppables() {
-    return this.droppables.filter(droppable => {
-      return droppable.type === this.DROP_TYPE;
-    })
   }
 
   dropOntoAnswer(event) {
@@ -161,7 +165,6 @@ export class AppComponent {
       event.previousIndex,
       event.currentIndex);
 
-
     const droppedOption = event.container.data[event.currentIndex];
 
     //reset linked data if it was used as an answer previously and dropped somewhere else
@@ -173,7 +176,10 @@ export class AppComponent {
       let transferDropOption = null;
 
       for (let [index, option] of droppableArea[this.DRAG_TYPE].entries()) {
-        if (option.id != droppedOption.id) {
+        //grab the option that was originally in this position to swap to the other spot;
+        //had to add a bit of logic here for the edge case where maybe it's the same option ID
+        //but the count is > 1 so they are separate on the page; generally imagine they'll be different!
+        if (option.id != droppedOption.id || (option.id === droppedOption.id && option.count > 1)) {
           transferOptionIndex = index;
           transferDropOption = option;
         }
@@ -181,16 +187,31 @@ export class AppComponent {
 
       const previousDroppableId = event.previousContainer.id;
       const previousDroppableArea = this.getDroppableById(previousDroppableId);
-      previousDroppableArea[this.DRAG_TYPE].push(transferDropOption);
+      //if swapping between two droppable zones
+      if (previousDroppableArea) {
+        previousDroppableArea[this.DRAG_TYPE].push(transferDropOption);
+        previousDroppableArea.disabled = true;
+      }
+      //if swapping betwen a droppable zone and the original option list
+      else {
+        transferArrayItem(event.container.data,
+          event.previousContainer.data,
+          transferOptionIndex,
+          event.previousIndex);
+        this.sortOptions();
+      }
+      
       transferDropOption[this.DROP_TYPE] = previousDroppableArea;
+      //transferDropOption.disabled = true;
     }
 
     //prevent user from dropping multiple options onto the same area
     droppableArea.disabled = true;
-    droppedOption.disabled = true;
+    //droppedOption.disabled = true;
 
     //link both options together and make data available for position calculations to snap to place, etc.
-    droppableArea[this.DRAG_TYPE] = [ droppedOption ];
+    //droppableArea[this.DRAG_TYPE] = [ droppedOption ];
+    droppableArea[this.DRAG_TYPE].push(droppedOption);
     droppedOption[this.DROP_TYPE] = droppableArea;
 
     //remove drag-enter styling

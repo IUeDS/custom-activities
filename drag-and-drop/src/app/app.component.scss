@@ -84,7 +84,9 @@
 }
 
 .cdk-drag-animating {
-    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+    //transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+    //transition: translate(300px, 300px) 1s; 
+    transition: transform 300ms ease-in-out;
   }
 
 /*.qc-dropped-option-incorrect {
