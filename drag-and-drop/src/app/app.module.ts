@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
@@ -17,9 +18,10 @@ import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ HttpClientModule ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

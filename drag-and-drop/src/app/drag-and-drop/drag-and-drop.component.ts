@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { QuestionService } from '../question-service.service';
+import { DatatrackingService } from '../datatracking.service';
 import {transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
@@ -8,11 +9,16 @@ import {transferArrayItem} from '@angular/cdk/drag-drop';
   templateUrl: './drag-and-drop.component.html',
   styleUrls: ['./drag-and-drop.component.scss'],
   providers: [
-  	QuestionService
+  	QuestionService,
+    DatatrackingService
   ]
 })
 export class DragAndDropComponent implements OnInit {
 
+  assessmentId = null;
+  attemptId = null;
+  attemptCountCorrect = 0;
+  attemptCountIncorrect = 0;
   questionId = null;
   currentQuestion = null;
   DRAG_TYPE = 'DRAGGABLE';
@@ -26,13 +32,39 @@ export class DragAndDropComponent implements OnInit {
   feedbackVisible = false;
   isCorrect = true;
 
-  constructor(private route: ActivatedRoute, private questionService: QuestionService) { }
+  constructor(private route: ActivatedRoute, private questionService: QuestionService, private datatrackingService: DatatrackingService) { }
 
   ngOnInit(): void {
+    this.getQuestion();
+    this.initAttempt();
+    this.initOptions();
+  }
+
+  getQuestion() {
     let params = this.route.snapshot.paramMap;
     this.questionId = params.get('questionId');
     this.currentQuestion = this.questionService.getQuestion(this.questionId);
-    this.initOptions();
+  }
+
+  initAttempt() {
+    let queryParams = this.route.snapshot.queryParamMap;
+    this.assessmentId = +(queryParams.get('id'));
+    let preview = queryParams.get('preview') ? true : false;
+
+    if (!this.assessmentId) {
+      return;
+    }
+
+    this.datatrackingService.initAttempt(this.assessmentId, preview)
+      .subscribe(
+        res =>  {
+          this.attemptId = +(res.data.attemptId);
+          this.datatrackingService.setAttemptId(this.attemptId);
+        },
+        err => {
+          console.log(err);
+          return false;
+        });
   }
 
   initOptions() {
@@ -69,6 +101,40 @@ export class DragAndDropComponent implements OnInit {
       }
     }
   }
+
+    //note: don't really need anything back from this, but subscribe() required to put it through
+    updateAttempt() {
+      if (this.attemptId < 0) { //don't record if we never got an attempt id
+        return false;
+      }
+      this.datatrackingService.updateAttempt(this.attemptCountCorrect, this.attemptCountIncorrect)
+          .subscribe(
+            res => {
+              return true;
+            },
+            err => {
+              console.log(err);
+              return false;
+            }
+          );
+    }
+  
+    //note: don't really need anything back from this, but subscribe() required to put it through
+    insertResponse(response) {
+      if (this.attemptId < 0) { //don't record if we never got an attempt id
+        return false;
+      }
+      this.datatrackingService.saveResponse(response)
+        .subscribe(
+          res => {
+            return true;
+          },
+          err => {
+            console.log(err);
+            return false;
+          }
+        );
+    }
 
   getDroppableLeftPosition(droppable) {
     //for droppable zone, position to make it a bounding box, but for a draggable that's been placed, snap to center
@@ -293,6 +359,24 @@ export class DragAndDropComponent implements OnInit {
       }
     }
 
+    //for now, just doing one question at a time
+    if (this.isCorrect) {
+      this.attemptCountCorrect = 1;
+    }
+    else {
+      this.attemptCountIncorrect = 1;
+    }
+
+    const response = {
+      'is_correct': this.isCorrect, 
+			'question': this.currentQuestion.questionText,
+			'answer': ' ',
+			'answer_key': ' ',
+			'retry_count': 0,
+    };
+
+    this.updateAttempt();
+    this.insertResponse(response);
     this.feedbackVisible = true;
   }
 
