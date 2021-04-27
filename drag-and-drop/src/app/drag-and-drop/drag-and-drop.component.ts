@@ -102,39 +102,63 @@ export class DragAndDropComponent implements OnInit {
     }
   }
 
-    //note: don't really need anything back from this, but subscribe() required to put it through
-    updateAttempt() {
-      if (this.attemptId < 0) { //don't record if we never got an attempt id
-        return false;
-      }
-      this.datatrackingService.updateAttempt(this.attemptCountCorrect, this.attemptCountIncorrect)
-          .subscribe(
-            res => {
-              return true;
-            },
-            err => {
-              console.log(err);
-              return false;
-            }
-          );
+  //note: don't really need anything back from this, but subscribe() required to put it through
+  updateAttempt() {
+    if (this.attemptId < 0) { //don't record if we never got an attempt id
+      return false;
+    }
+    this.datatrackingService.updateAttempt(this.attemptCountCorrect, this.attemptCountIncorrect)
+      .subscribe(
+        res => {
+          return true;
+        },
+        err => {
+          console.log(err);
+          return false;
+        }
+      );
     }
   
-    //note: don't really need anything back from this, but subscribe() required to put it through
-    insertResponse(response) {
-      if (this.attemptId < 0) { //don't record if we never got an attempt id
-        return false;
-      }
-      this.datatrackingService.saveResponse(response)
-        .subscribe(
-          res => {
-            return true;
-          },
-          err => {
-            console.log(err);
-            return false;
-          }
-        );
+  //note: don't really need anything back from this, but subscribe() required to put it through
+  insertResponse(response) {
+    if (this.attemptId < 0) { //don't record if we never got an attempt id
+      return false;
     }
+    this.datatrackingService.saveResponse(response)
+      .subscribe(
+        res => {
+          return true;
+        },
+        err => {
+          console.log(err);
+          return false;
+        }
+      );
+  }
+
+  isDraggedImg(droppable) {
+    if (!droppable[this.DRAG_TYPE].length) {
+      return false;
+    }
+
+    if (!droppable[this.DRAG_TYPE][0].img_url) {
+      return false;
+    }
+
+    return true;
+  }
+
+  isDraggedText(droppable) {
+    if (!droppable[this.DRAG_TYPE].length) {
+      return false;
+    }
+
+    if (!droppable[this.DRAG_TYPE][0].text) {
+      return false;
+    }
+
+    return true;
+  }
 
   getDroppableLeftPosition(droppable) {
     //for droppable zone, position to make it a bounding box, but for a draggable that's been placed, snap to center

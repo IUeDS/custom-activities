@@ -1,7 +1,7 @@
 <p class="qc-assessment-question">{{ this.currentQuestion.question_text }}</p>
 <div cdkDropListGroup class="qc-drag-question">
   <div class="qc-droppable-container">
-    <img class="qc-droppable-base-img" [src]="this.image.imgUrl" [width]="this.image.width" [height]="this.image.height" />
+    <img class="qc-droppable-base-img" [src]="this.image.img_url" [width]="this.image.width" [height]="this.image.height" />
     <div *ngFor="let droppable of this.getDroppables()">
       <div cdkDropList
         [id]="droppable.id"
@@ -13,7 +13,7 @@
         [ngClass]="{
           'qc-droppable-disabled': droppable.disabled ? true : false, 
           'qc-droppable-zone-entered': droppable.entered ? true : false, 
-          'qc-dropped-option': droppable.imgUrl ? true : false,
+          'qc-dropped-option': (droppable.img_url || droppable.text) ? true : false,
           'qc-droppable-incorrect': droppable.incorrect ? true : false 
         }" 
         [ngStyle]="{
@@ -23,13 +23,19 @@
           'height.px': droppable.height
         }"
         >
-          <img *ngIf="droppable[this.DRAG_TYPE].length"
+          <img *ngIf="this.isDraggedImg(droppable)"
             cdkDrag
-            class="qc-dropped-option"  
-            [src]="droppable[this.DRAG_TYPE][0].imgUrl" 
+            class="qc-dropped-option"
+            [src]="droppable[this.DRAG_TYPE][0].img_url" 
             [width]="droppable[this.DRAG_TYPE][0].width" 
             [height]="droppable[this.DRAG_TYPE][0].height"
           />
+          <span *ngIf="this.isDraggedText(droppable)"
+            cdkDrag
+            class="qc-dropped-option qc-draggable-text"
+            [ngStyle]="{'font-size': droppable[this.DRAG_TYPE][0].font_size}">
+            {{ droppable[this.DRAG_TYPE][0].text }}
+          </span>
       </div>
     </div>
   </div>
@@ -47,7 +53,8 @@
       class="qc-draggable"
       [ngClass]="{'qc-duplicate-drag-option': draggable.count > 1 ? true : false}"
       [ngStyle]="{'width.px': draggable.width, 'height.px': draggable.height}">
-      <img [src]="draggable.imgUrl" [width]="draggable.width" [height]="draggable.height" />
+      <img *ngIf="draggable.img_url" [src]="draggable.img_url" [width]="draggable.width" [height]="draggable.height" />
+      <span *ngIf="draggable.text" class="qc-draggable-text" [ngStyle]="{'font-size': draggable.font_size}">{{ draggable.text }}</span>
     </div>
   </div>
 </div>

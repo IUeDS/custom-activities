@@ -4,6 +4,10 @@
     //border: dashed 2px gray;
 }
 
+.qc-draggable-text {
+    padding: 5px;
+}
+
 .qc-droppable-base-img {
     z-index: 1;
     margin-bottom: 50px;
@@ -14,7 +18,8 @@
     border: dashed 2px gray;
 }
 
-.qc-droppable-incorrect img {
+.qc-droppable-incorrect img,
+.qc-droppable-incorrect .qc-draggable-text {
     animation: pulse 5s infinite;
 }
 
@@ -74,6 +79,10 @@
 
 .qc-dropped-option {
     z-index: 50;
+}
+
+//center images but not text, which lines up without additional styles 
+img.qc-dropped-option {
     //center vertically and horizontally
     position: relative;
     left: 50%;
