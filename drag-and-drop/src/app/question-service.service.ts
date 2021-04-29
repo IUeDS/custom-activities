@@ -51,7 +51,26 @@ export class QuestionService {
         {id: 20, type: "DROPPABLE", count: 1, width: 30, height: 40, img_url: null, text: null, font_size: null, left: 70, top: 425, answer_id: 13 },
         {id: 21, type: "DROPPABLE", count: 1, width: 30, height: 40, img_url: null, text: null, font_size: null, left: 235, top: 425, answer_id: 12 },
         {id: 22, type: "DROPPABLE", count: 1, width: 30, height: 40, img_url: null, text: null, font_size: null, left: 310, top: 265, answer_id: 11 },
-
+      ]
+    },
+    {
+      id: 3,
+      question_text: 'Draw the more stable conformation of ⍺-D-Galactopyranose. ',
+      options: [
+        {id: 23, type: "IMAGE", count: 1, width: 332, height: 144, img_url: './assets/q3/q3-base.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 24, type: "DRAGGABLE", count: 1, width: 68, height: 138, img_url: './assets/q3/q3-option1.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 25, type: "DRAGGABLE", count: 1, width: 75, height: 138, img_url: './assets/q3/q3-option2.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 26, type: "DRAGGABLE", count: 1, width: 115, height: 134, img_url: './assets/q3/q3-option3.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 27, type: "DRAGGABLE", count: 1, width: 115, height: 134, img_url: './assets/q3/q3-option4.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 28, type: "DRAGGABLE", count: 1, width: 240, height: 65, img_url: './assets/q3/q3-option5.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 29, type: "DRAGGABLE", count: 1, width: 240, height: 72, img_url: './assets/q3/q3-option6.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 30, type: "DRAGGABLE", count: 1, width: 166, height: 65, img_url: './assets/q3/q3-option7.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 31, type: "DRAGGABLE", count: 1, width: 138, height: 135, img_url: './assets/q3/q3-option8.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 32, type: "DROPPABLE", count: 1, width: 55, height: 120, img_url: null, text: null, font_size: null, left: 28, top: -35, answer_id: 24 },
+        {id: 33, type: "DROPPABLE", count: 1, width: 150, height: 50, img_url: null, text: null, font_size: null, left: 9, top: 106, answer_id: 30 },
+        {id: 34, type: "DROPPABLE", count: 1, width: 100, height: 120, img_url: null, text: null, font_size: null, left: 238, top: 147, answer_id: 27 },
+        {id: 35, type: "DROPPABLE", count: 1, width: 55, height: 120, img_url: null, text: null, font_size: null, left: 330, top: 186, answer_id: 25 },
+        {id: 36, type: "DROPPABLE", count: 1, width: 105, height: 120, img_url: null, text: null, font_size: null, left: 125, top: 4, answer_id: 31 }
       ]
     }
   ];

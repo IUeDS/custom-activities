@@ -368,8 +368,16 @@ export class DragAndDropComponent implements OnInit {
   }
 
   isSubmitDisabled() {
-    if (this.draggables.length || this.feedbackVisible) {
+    if (this.feedbackVisible) {
       return true;
+    }
+
+    //determine by droppables being matched rather than draggables,
+    //in case there are distractors
+    for (let droppable of this.droppables) {
+      if (!droppable[this.DRAG_TYPE].length) {
+        return true;
+      }
     }
 
     return false;
