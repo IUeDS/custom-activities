@@ -72,6 +72,39 @@ export class QuestionService {
         {id: 35, type: "DROPPABLE", count: 1, width: 55, height: 120, img_url: null, text: null, font_size: null, left: 330, top: 186, answer_id: 25 },
         {id: 36, type: "DROPPABLE", count: 1, width: 105, height: 120, img_url: null, text: null, font_size: null, left: 125, top: 4, answer_id: 31 }
       ]
+    },
+    {
+      id: 4,
+      question_text: 'Draw the structure of D-Glucose.',
+      options: [
+        {id: 37, type: "IMAGE", count: 1, width: 205, height: 565, img_url: './assets/q4/q4-base.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 38, type: "DRAGGABLE", count: 4, width: 90, height: 64, img_url: './assets/q4/q4-option1.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 39, type: "DRAGGABLE", count: 4, width: 64, height: 64, img_url: './assets/q4/q4-option2.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 40, type: "DROPPABLE", count: 1, width: 50, height: 40, img_url: null, text: null, font_size: null, left: -10, top: 163, answer_id: 39 },
+        {id: 41, type: "DROPPABLE", count: 1, width: 50, height: 40, img_url: null, text: null, font_size: null, left: -10, top: 258, answer_id: 38 },
+        {id: 42, type: "DROPPABLE", count: 1, width: 50, height: 40, img_url: null, text: null, font_size: null, left: -10, top: 351, answer_id: 39 },
+        {id: 43, type: "DROPPABLE", count: 1, width: 50, height: 40, img_url: null, text: null, font_size: null, left: -10, top: 445, answer_id: 39 },
+        {id: 44, type: "DROPPABLE", count: 1, width: 50, height: 40, img_url: null, text: null, font_size: null, left: 225, top: 163, answer_id: 38 },
+        {id: 45, type: "DROPPABLE", count: 1, width: 50, height: 40, img_url: null, text: null, font_size: null, left: 225, top: 258, answer_id: 39 },
+        {id: 46, type: "DROPPABLE", count: 1, width: 50, height: 40, img_url: null, text: null, font_size: null, left: 225, top: 351, answer_id: 38 },
+        {id: 47, type: "DROPPABLE", count: 1, width: 50, height: 40, img_url: null, text: null, font_size: null, left: 225, top: 445, answer_id: 38 }
+      ]
+    },
+    {
+      id: 5,
+      question_text: 'Draw the structure of Methionine.',
+      options: [
+        {id: 48, type: "IMAGE", count: 1, width: 315, height: 500, img_url: './assets/q5/q5-base.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 49, type: "DRAGGABLE", count: 1, width: 60, height: 43, img_url: './assets/q5/q5-option1.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 50, type: "DRAGGABLE", count: 1, width: 43, height: 43, img_url: './assets/q5/q5-option2.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 51, type: "DRAGGABLE", count: 2, width: 68, height: 41, img_url: './assets/q5/q5-option3.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 52, type: "DRAGGABLE", count: 1, width: 85, height: 39, img_url: './assets/q5/q5-option4.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 53, type: "DRAGGABLE", count: 1, width: 43, height: 39, img_url: './assets/q5/q5-option5.png', text: null, font_size: null, left: null, top: null, answer_id: null },
+        {id: 54, type: "DROPPABLE", count: 1, width: 30, height: 30, img_url: null, text: null, font_size: null, left: 157, top: 15, answer_id: 52 },
+        {id: 55, type: "DROPPABLE", count: 1, width: 30, height: 30, img_url: null, text: null, font_size: null, left: 157, top: 120, answer_id: 53 },
+        {id: 56, type: "DROPPABLE", count: 1, width: 30, height: 30, img_url: null, text: null, font_size: null, left: 157, top: 220, answer_id: 51 },
+        {id: 57, type: "DROPPABLE", count: 1, width: 30, height: 30, img_url: null, text: null, font_size: null, left: 157, top: 320, answer_id: 51 },
+      ]
     }
   ];
 }

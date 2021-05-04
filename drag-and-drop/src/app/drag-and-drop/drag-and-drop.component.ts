@@ -96,8 +96,8 @@ export class DragAndDropComponent implements OnInit {
         for (let j = 0; j < draggable.count - 1; j++) {
           const clone = JSON.parse(JSON.stringify(draggable));
           this.draggables.splice(i, 0, clone);
-          i += (draggable.count - 1); //increment counter so we don't loop over those we just added
         }
+        i += (draggable.count - 1); //increment counter so we don't loop over those we just added
       }
     }
   }
@@ -415,6 +415,22 @@ export class DragAndDropComponent implements OnInit {
   restart() {
     //hard page refresh to ensure a new attempt is created
     window.location.reload();
+  }
+
+  isLastDuplicateDraggable(draggable, i) {
+    if (draggable.count === 1) {
+      return false;
+    }
+
+    if (i === this.draggables.length - 1) {
+      return false;
+    }
+
+    if (draggable.id === this.draggables[i + 1].id) {
+      return false;
+    }
+
+    return true;
   }
 
 }

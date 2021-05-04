@@ -48,14 +48,17 @@
     [ngClass]="{'qc-droppable-zone-entered': this.dragListHighlighted}"
     *ngIf="!this.feedbackVisible"
     class="qc-drag-option-list">
-    <div *ngFor="let draggable of this.draggables; index as i" 
-      cdkDrag
-      class="qc-draggable"
-      [ngClass]="{'qc-duplicate-drag-option': draggable.count > 1 ? true : false}"
-      [ngStyle]="{'width.px': draggable.width, 'height.px': draggable.height}">
-      <img *ngIf="draggable.img_url" [src]="draggable.img_url" [width]="draggable.width" [height]="draggable.height" />
-      <span *ngIf="draggable.text" class="qc-draggable-text" [ngStyle]="{'font-size': draggable.font_size}">{{ draggable.text }}</span>
-    </div>
+    <ng-container *ngFor="let draggable of this.draggables; index as i">
+      <div cdkDrag
+        class="qc-draggable"
+        [ngClass]="{'qc-duplicate-drag-option': draggable.count > 1 ? true : false}"
+        [ngStyle]="{'width.px': draggable.width, 'height.px': draggable.height}">
+        <img *ngIf="draggable.img_url" [src]="draggable.img_url" [width]="draggable.width" [height]="draggable.height" />
+        <span *ngIf="draggable.text" class="qc-draggable-text" [ngStyle]="{'font-size': draggable.font_size}">{{ draggable.text }}</span>
+      </div>
+      <!-- break to a new line at the end of a row of duplicates (needed if two sets of duplicates in a row) -->
+      <br *ngIf="this.isLastDuplicateDraggable(draggable, i)"/>
+    </ng-container>
   </div>
 </div>
 <div class="qc-drag-feedback" *ngIf="this.feedbackVisible">
