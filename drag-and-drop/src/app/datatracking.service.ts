@@ -34,8 +34,8 @@ export class DatatrackingService {
       );
   }
 
-  updateAttempt(attemptCountCorrect : number, attemptCountIncorrect : number) {
-    let attempt = {'count_correct': attemptCountCorrect, 'count_incorrect': attemptCountIncorrect};
+  updateAttempt(attemptCountCorrect : number, attemptCountIncorrect : number, complete: number, calculated_score: number) {
+    let attempt = {'count_correct': attemptCountCorrect, 'count_incorrect': attemptCountIncorrect, complete, calculated_score};
     let endpoint = `${this.APIBaseUrl}attempt/update/${this.attemptId}`;
     return this.http.post(endpoint, attempt)
       .pipe(

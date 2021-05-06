@@ -103,11 +103,11 @@ export class DragAndDropComponent implements OnInit {
   }
 
   //note: don't really need anything back from this, but subscribe() required to put it through
-  updateAttempt() {
+  updateAttempt(complete, calculatedScore) {
     if (this.attemptId < 0) { //don't record if we never got an attempt id
       return false;
     }
-    this.datatrackingService.updateAttempt(this.attemptCountCorrect, this.attemptCountIncorrect)
+    this.datatrackingService.updateAttempt(this.attemptCountCorrect, this.attemptCountIncorrect, complete, calculatedScore)
       .subscribe(
         res => {
           return true;
@@ -400,14 +400,17 @@ export class DragAndDropComponent implements OnInit {
     }
 
     const response = {
-      'is_correct': this.isCorrect, 
-			'question': this.currentQuestion.questionText,
+      'is_correct': this.isCorrect ? 1 : 0, 
+			'question': this.currentQuestion.question_text,
 			'answer': ' ',
 			'answer_key': ' ',
 			'retry_count': 0,
     };
 
-    this.updateAttempt();
+    //for now, just doing 1 question per activity, but making it flexible in case we need to add multiple
+    const complete = 1;
+    const calculatedScore = this.isCorrect ? 1 : 0;
+    this.updateAttempt(complete, calculatedScore);
     this.insertResponse(response);
     this.feedbackVisible = true;
   }
