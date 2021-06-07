@@ -38,6 +38,7 @@ export class DragAndDropComponent implements OnInit {
     this.getQuestion();
     this.initAttempt();
     this.initOptions();
+    this.setLtiHeight();
   }
 
   getQuestion() {
@@ -100,6 +101,27 @@ export class DragAndDropComponent implements OnInit {
         i += (draggable.count - 1); //increment counter so we don't loop over those we just added
       }
     }
+  }
+
+  isInIframe() {
+    if (self == top) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  setLtiHeight() {
+    if (!this.isInIframe()) {
+      return;
+    }
+
+    setTimeout(() => {
+      //default to the exact iframe height, plus a sliver extra just in case
+      const height = document.querySelector('body').clientHeight + 75;
+      window.parent.postMessage(JSON.stringify({subject: 'lti.frameResize', height: height}), '*');
+    }, 0);
   }
 
   //note: don't really need anything back from this, but subscribe() required to put it through
