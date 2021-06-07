@@ -1,0 +1,228 @@
+.qc-droppable-zone {
+    position: absolute;
+    z-index: 10;
+    //border: dashed 2px gray;
+}
+
+.qc-draggable-text {
+    padding: 5px;
+}
+
+.qc-droppable-base-img {
+    z-index: 1;
+    margin-bottom: 50px;
+}
+
+.qc-droppable-zone.cdk-drop-list-receiving,
+.qc-droppable-zone.cdk-drop-list-dragging {
+    border: dashed 2px gray;
+}
+
+.qc-droppable-incorrect img,
+.qc-droppable-incorrect .qc-draggable-text {
+    animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    50% {
+      background-color: rgba(211, 61, 55, 0.3);
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+.qc-droppable-zone.cdk-drop-list-receiving.qc-droppable-disabled,
+.qc-droppable-zone.cdk-drop-list-dragging.qc-droppable-disabled {
+    border: none;
+}
+
+.qc-droppable-zone-entered,
+.qc-droppable-zone.cdk-drop-list-receiving.qc-droppable-zone-entered,
+.qc-droppable-zone.cdk-drop-list-dragging.qc-droppable-zone-entered {
+    border: dashed 2px cornflowerblue;
+}
+
+.qc-droppable-zone-entered.qc-droppable-disabled {
+    border: none;
+}
+
+.qc-droppable-container {
+    position: relative;
+    margin-top: 75px;
+}
+
+.qc-drag-question {
+    margin-left: 100px;
+}
+
+.qc-draggable {
+    margin-bottom: 20px;
+}
+
+.qc-duplicate-drag-option {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.qc-drag-option-list {
+    width: fit-content;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.qc-dropped-option-container {
+    position: relative;
+}
+
+.qc-dropped-option {
+    z-index: 50;
+}
+
+//center images but not text, which lines up without additional styles 
+img.qc-dropped-option {
+    //center vertically and horizontally
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cdk-drag-animating {
+    transition: transform 300ms ease-in-out;
+  }
+
+//temp, question text styles defined by QC
+.qc-assessment-question {
+    padding: 20px;
+    font-size: 1.5em;
+}
+
+//copied from QC styles for buttons and feedback
+$neutral-gray: #e5e5e5;
+$dark-gray: #ccc;
+$iron-gray: #333;
+$restart-red: #b71a1a;
+$seafoam-green: #84d0a5;
+$seafoam-green-darker: #6ec895;
+$white: #fff;
+$black: #000;
+$ocean-blue-muted: #213c48;
+
+.qc-assessment-button-area {
+    float: left;
+    margin-top: 30px;
+    width: 35%;
+    font-family: 'Arial', sans-serif;
+    margin-left: 30px;
+    font-weight: 400;
+    line-height: 2;
+
+    button {
+        font-size: 1em;
+    }
+}
+
+//gray button to click to restart
+.qc-btn-restart-assessment {
+    background-color: $neutral-gray;
+
+    &:hover,
+    &:focus {
+        background-color: $dark-gray;
+    }
+}
+
+.qc-current-score,
+.qc-submit-response,
+.qc-restart {
+    border: 0;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    clear: left;
+    float: left;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    letter-spacing: .05em;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: left;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: 90%;
+}
+
+.qc-current-score {
+    background-color: $neutral-gray;
+}
+
+#qc-completion-modal,
+#qc-feedback-modal {
+    h2 { //don't capitalize h2 in modal
+        text-transform: none;
+    }
+}
+
+//visual indication of focus for buttons
+.qc-restart,
+.qc-submit-response,
+.qc-continue-btn,
+.qc-row-continue-btn,
+.qc-btn-restart-assessment {
+    &:focus {
+        border: solid $iron-gray 3px;
+    }
+}
+
+.qc-restart {
+    background-color: $restart-red;
+    color: $white;
+
+    &:hover {
+        color: $dark-gray;
+        cursor: pointer;
+    }
+}
+
+.qc-submit-response {
+    background-color: $seafoam-green;
+    color: $black;
+    margin-bottom: 30px;
+
+    &:hover {
+        background-color: $seafoam-green-darker;
+        cursor: pointer;
+    }
+
+    &:disabled {
+        background-color: $neutral-gray;
+
+        &:hover {
+            color: $black;
+            cursor: not-allowed;
+        }
+    }
+}
+
+//not directly lifted from QC, but mocking a similar style without using bootstrap
+.qc-drag-feedback {
+    padding: 15px;
+    width: 200px;
+    margin: 50px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,0,0,.125);
+
+    h2 {
+        color: $ocean-blue-muted;
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.9rem;
+        font-weight: 400;
+        line-height: 0.5em;
+        text-transform: uppercase;
+    }
+}
+
