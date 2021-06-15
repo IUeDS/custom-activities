@@ -126,7 +126,7 @@ export class DragAndDropComponent implements OnInit {
 
   //note: don't really need anything back from this, but subscribe() required to put it through
   updateAttempt(complete, calculatedScore) {
-    if (this.attemptId < 0) { //don't record if we never got an attempt id
+    if (!this.attemptId) { //don't record if we never got an attempt id
       return false;
     }
     this.datatrackingService.updateAttempt(this.attemptCountCorrect, this.attemptCountIncorrect, complete, calculatedScore)
@@ -143,10 +143,26 @@ export class DragAndDropComponent implements OnInit {
   
   //note: don't really need anything back from this, but subscribe() required to put it through
   insertResponse(response) {
-    if (this.attemptId < 0) { //don't record if we never got an attempt id
+    if (!this.attemptId) { //don't record if we never got an attempt id
       return false;
     }
     this.datatrackingService.saveResponse(response)
+      .subscribe(
+        res => {
+          return true;
+        },
+        err => {
+          console.log(err);
+          return false;
+        }
+      );
+  }
+
+  gradePassback() {
+    if (!this.attemptId) { //don't record if we never got an attempt id
+      return false;
+    }
+    this.datatrackingService.gradePassback(this.attemptId)
       .subscribe(
         res => {
           return true;
@@ -434,6 +450,7 @@ export class DragAndDropComponent implements OnInit {
     const calculatedScore = this.isCorrect ? 1 : 0;
     this.updateAttempt(complete, calculatedScore);
     this.insertResponse(response);
+    this.gradePassback();
     this.feedbackVisible = true;
   }
 

@@ -13,14 +13,24 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class DatatrackingService {
 
-  private attemptId: number = -1;
+  private attemptId: number = null;
   private APIBaseUrl = '/index.php/api/';
-  private assessmentId = -1;
+  private assessmentId = null;
 
   constructor(private http: HttpClient) { }
 
   setAttemptId(attemptId : number) {
     this.attemptId = attemptId;
+  }
+
+  gradePassback(attemptId : number) {
+    let endpoint = `${this.APIBaseUrl}grade/passback`;
+    let body = { 'attemptId': attemptId };
+    return this.http.post(endpoint, body)
+      .pipe(
+        map((res: any) => res),
+        catchError((error:any) => Observable.throw(error.error || 'Server error'))
+      );
   }
 
   initAttempt(assessmentId : number, preview : boolean) {
