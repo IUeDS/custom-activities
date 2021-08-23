@@ -5,7 +5,7 @@ export class QuestionService {
 
   constructor() { }
 
-  private a111RootUrl = 'https://indiana.edu/~jsomelec';
+  private a111RootUrl = 'https://jsomelec.sitehost.iu.edu';
 
   getPageQuestions(labNum, pageNum) {
 		let labString = 'lab' + labNum.toString();
