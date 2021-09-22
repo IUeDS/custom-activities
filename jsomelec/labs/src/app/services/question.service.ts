@@ -1847,6 +1847,7 @@ export class QuestionService {
 			    `,
 			    'questionText': `<p><strong>2-11.</strong> What should be the total resistance of the circuit?</p>`,
 			    'questionType': 'numerical',
+				'textAfterInput': 'KΩ',
 			    'options': [
 			        {
 			            'low': 9.5,
@@ -1883,6 +1884,7 @@ export class QuestionService {
                 `,
                 'questionText': `<p><strong>2-12.</strong> Start creating the circuit  on the breadboard by connecting R6 and R7. Measure their total value with the Multi-meter  and record it here.</p>`,
                 'questionType': 'numerical',
+				'textAfterInput': 'KΩ',
                 'options': [
                     {
                         'low': 19,
@@ -1909,6 +1911,7 @@ export class QuestionService {
                 'htmlBeforeQuestion': ``,
                 'questionText': `<p><strong>2-13.</strong> Next add R5, measure the total resistance and record it here. </p>`,
                 'questionType': 'numerical',
+				'textAfterInput': 'KΩ',
                 'options': [
                     {
                         'low': 9.5,
@@ -1935,6 +1938,7 @@ export class QuestionService {
                 'htmlBeforeQuestion': ``,
                 'questionText': `<p><strong>2-14.</strong> Next add R4, measure the total resistance and record it here. </p>`,
                 'questionType': 'numerical',
+				'textAfterInput': 'KΩ',
                 'options': [
                     {
                         'low': 19,
@@ -1961,6 +1965,7 @@ export class QuestionService {
                 'htmlBeforeQuestion': ``,
                 'questionText': `<p><strong>2-15.</strong> Next add R3, measure the total resistance and record it here. </p>`,
                 'questionType': 'numerical',
+				'textAfterInput': 'KΩ',
                 'options': [
                     {
                         'low': 9.5,
@@ -1987,6 +1992,7 @@ export class QuestionService {
                 'htmlBeforeQuestion': ``,
                 'questionText': `<p><strong>2-16.</strong> Next add R2, measure the total resistance and record it here. </p>`,
                 'questionType': 'numerical',
+				'textAfterInput': 'KΩ',
                 'options': [
                     {
                         'low': 19,
@@ -2013,6 +2019,7 @@ export class QuestionService {
                 'htmlBeforeQuestion': ``,
                 'questionText': `<p><strong>2-17.</strong> Next add R1, measure the total resistance and record it here. </p>`,
                 'questionType': 'numerical',
+				'textAfterInput': 'KΩ',
                 'options': [
                     {
                         'low': 9.5,
