@@ -2084,8 +2084,10 @@ export class QuestionService {
 		                    	<li>Connect one end of the 1/8” to 1/8” cable to your audio player headphone output.</li>
 		                        <li>Connect the other end to the “External Audio  Input” of the lab kit.</li>
 		                        <div class='image_left'>
-		                        	<img src='${this.a111RootUrl}/A111/img/unit04/labs/eighthcable.jpg' width='200' height='150'>
-		                        </div>
+									<a href="${this.a111RootUrl}/A111/img/unit04/labs/eighthcable.jpg" target="new">
+		                        		<img src='${this.a111RootUrl}/A111/img/unit04/labs/eighthcable.jpg' width='200' height='150'>
+									</a>
+								</div>
 		                    </ul>
 		                </li>
 		                <li> Now get a Green jumper wire from the bag of jumper wires that came with your kit (the shortest you can find would be best).
@@ -2093,7 +2095,9 @@ export class QuestionService {
 		                    	<li>Connect one end to the “Aux Audio Out G” connection on your lab kit.</li>
 		                        <li>Connect the other end to the “Amp In G” connection on your lab kit.</li>
 		                        <div class='image_left'>
-		                        	<img src='${this.a111RootUrl}/A111/img/unit04/labs/AmpIngnd.jpg' width='300' height='225'>
+									<a href="${this.a111RootUrl}/A111/img/unit04/labs/AmpIngnd.jpg" target="new">
+		                        		<img src='${this.a111RootUrl}/A111/img/unit04/labs/AmpIngnd.jpg' width='300' height='225'>
+									</a>
 		                        </div>
 		                    </ul>
 		                </li>
@@ -2102,8 +2106,10 @@ export class QuestionService {
 		                    	<li>Connect one end to the “Aux Audio Out +” connection on your lab kit.</li>
 		                        <li>Connect the other end to the “Amp In +” connection on your lab kit.</li>
 		                        <div class='image_left'>
-		                        	<img src='${this.a111RootUrl}/A111/img/unit04/labs/AudioPlusconnected.jpg' width='300' height='225'>
-		                        </div>
+									<a href="${this.a111RootUrl}/A111/img/unit04/labs/AudioPlusconnected.jpg" target="new">
+		                        		<img src='${this.a111RootUrl}/A111/img/unit04/labs/AudioPlusconnected.jpg' width='300' height='225'>
+									</a>
+								</div>
 		                    </ul>
 		                </li>
 		                <li>Next get an Orange jumper wire from the bag of jumper wires that came with your kit (the longest you can find would be best).
@@ -2111,7 +2117,9 @@ export class QuestionService {
 		                        <li>Connect one end to the “Amp Spk Out”  top connection on your lab kit.</li>
 		                        <li>Connect the other end to the “Spk In” top connection on your lab kit.</li>
 		                        <div class='image_left'>
-		                            <img src='${this.a111RootUrl}/A111/img/unit04/labs/SPKPlusConnected.jpg' width='300' height='274'>
+									<a href="${this.a111RootUrl}/A111/img/unit04/labs/SPKPlusConnected.jpg" target="new">
+		                            	<img src='${this.a111RootUrl}/A111/img/unit04/labs/SPKPlusConnected.jpg' width='300' height='274'>
+									</a>
 		                        </div>
 		                    </ul>
 		                </li>
@@ -2120,7 +2128,9 @@ export class QuestionService {
 		                    	<li>Connect one end to the “Amp Spk Out” bottom connection on your lab kit.</li>
 		                        <li>Connect the other end to the “Spk In” bottom connection on your lab kit.</li>
 		                        <div class='image_left'>
-		                            <img src='${this.a111RootUrl}/A111/img/unit04/labs/SPKNegConnected.jpg' width='300' height='225'>
+									<a href="${this.a111RootUrl}/A111/img/unit04/labs/SPKNegConnected.jpg" target="new">
+		                            	<img src='${this.a111RootUrl}/A111/img/unit04/labs/SPKNegConnected.jpg' width='300' height='225'>
+									</a>
 		                        </div>
 		                    </ul>
 		                </li>
@@ -2143,7 +2153,9 @@ export class QuestionService {
 		                  This will become &quot;<em>junction point D</em>&quot; in our circuit.
 		                </li>
 		                <div class='image_right'>
-		                	<img src='${this.a111RootUrl}/A111/img/unit03/labs/FlatCircuit.png' alt="schematic" width='300' height='144' class="image_border"><br>
+							<a href="${this.a111RootUrl}/A111/img/unit03/labs/FlatCircuit.png" target="new">
+		                		<img src='${this.a111RootUrl}/A111/img/unit03/labs/FlatCircuit.png' alt="schematic" width='300' height='144' class="image_border"><br>
+							</a>
 		                    <a href="${this.a111RootUrl}/A111/img/unit04/labs/Breadboardconnection1.jpg" target="new">
 		                    	<img src='${this.a111RootUrl}/A111/img/unit04/labs/Breadboardconnection1.jpg' width='108' height='238' class="image_border">
 		                    </a>
@@ -2232,7 +2244,9 @@ export class QuestionService {
                 'htmlBeforeQuestion': `
 					<div class="line_break"></div>
 			        <div class='image_right'>
-			        	<img src='${this.a111RootUrl}/A111/img/unit03/labs/IndSer.png' alt="" width='400' height='198'>
+						<a href="${this.a111RootUrl}/A111/img/unit03/labs/IndSer.png" target="new">
+			        		<img src='${this.a111RootUrl}/A111/img/unit03/labs/IndSer.png' alt="" width='400' height='198'>
+						</a>
 			        </div>
 			        <h2>Build It, Hear it, <strike>Blow it up</strike>?</h2>
 			        <p><strong>3-4.</strong> For the first filter we are going to insert a 10mH inductor in series with our speaker as shown in figure 2-2. In order to make it work with this “real world” example we need to add a resistor (22Ω) in series with the inductor and speaker. The schematic shows a Voltage source (V1). This is actually: your music player + the audio amplifier in your lab kit.</p>
@@ -2434,7 +2448,9 @@ export class QuestionService {
 					<div class="line_break"></div>
 			        <h2>Build it and make some noise.</h2>
 			        <div class='image_right'>
-			        	<img src='${this.a111RootUrl}/A111/img/unit03/labs/IndPar.png' alt="" width='400' height="192">
+						<a href="${this.a111RootUrl}/A111/img/unit03/labs/IndPar.png" target="new">
+			        		<img src='${this.a111RootUrl}/A111/img/unit03/labs/IndPar.png' alt="" width='400' height="192">
+						</a>
 			        </div>
 			        <p><strong>3-6.</strong> Remove the inductors from your breadboard and connect junction points B and C so you can hear audio again. Next you will be connecting an inductor in parallel with the speaker. Figure 2-4 shows the schematic for the inductor in parallel with the speaker.</p>
 			        <ul>
