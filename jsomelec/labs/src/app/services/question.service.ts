@@ -3730,6 +3730,11 @@ In addition to your lab kit you will need something to play some music, a phone 
 			          	<img src='${this.a111RootUrl}/A111/img/unit05/labs/Lab7_schem1.png' width='300' height='375'>
 			          </div>
 			          <p><strong>7-11.</strong> If you did not do so earlier, plug your lab kit into the wall for power. You should see the meter and voltage indicator lights turn on. Also turn on your digital multimeter if it is not already on.</p>
+					  <p>Check that you still have 0V on the control grid. <i>This will typically change after the tube warms up.</i></p>
+  	 				  <ul>
+						 <li>move the switch below the meter built into your kit to the right so that is displays the voltage of the "Var +/-" output</li>
+            			 <li>set the control above the "Var +/-" connections so that the meter (set above) reads 0V.</li>
+					  </ul>
 			          <p><strong>7-12.</strong> You should now have some current flowing. </p>
                 `,
                 'questionText': `<p><strong>Question #5: How much current (in mA) does the meter indicate is flowing?</strong></p>`,
