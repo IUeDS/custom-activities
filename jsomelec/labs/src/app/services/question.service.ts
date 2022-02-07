@@ -3714,17 +3714,18 @@ In addition to your lab kit you will need something to play some music, a phone 
 			                	<img src='${this.a111RootUrl}/A111/img/unit05/labs/lab7-6.jpg' width='300' height='223' class="image_border">
 			                </a>
 			             </div>
-			          <p><strong>7-10.</strong> Now you need to connect a voltage source to the heater so that the cathode can be heated. We will use the "+Var" for this.</p>
+			          <p><strong>7-10.</strong> Now you need to connect a voltage source to the heater so that the cathode can be heated. We will use the "12V" AC source (to the right of your tube socket) for this.</p>
 			          <ol>
-			            <li>move the switch below the meter built into your kit to the left so that is displays the voltage of the "+Var" output</li>
-			            <li>adjust the knob above the "+Var" until the meter above it shows "12.00" (or within +/-0.25V of 12V)</li>
-			            <li>connect one end of an orange jumper wire to "+Var"</li>
+			            <li>connect one end of an orange jumper wire to the &quot;+&quot; connection under "12V" to the right of your tube socket</li>
+			            <li>connect the other end of the orange jumper wire to pin#4 <em>(this is the first connection to the heater)</em><br><em>See figure 1-9 </em></li>
+			            <li>connect one end of a new orange jumper wire to the &quot;G&quot; connection under "12V" to the right of your tube socket<br>
+						<em>See figure 1-10</em></li>
 			            <li>connect the other end of the orange jumper wire to pin#4 <em>(this is the first connection to the heater)</em><br>
 			            <em>See figure 1-9 </em></li>
 			            <li>connect one end of a new green jumper wire to "GND"<br>
 			              <em>See figure 1-10</em>
 			            </li>
-			            <li>connect the other end of the green jumper wire to pin#5 <em>(this is the other connection to the heater)</em></li>
+			            <li>connect the other end of this second jumper wire to pin#5 <em>(this is the other connection to the heater)<br>note that since this is AC is does not matter if you reverse whether + goes to pin 4 or 5 as long as the other pin goes to G</em></li>
 			          </ol>
 			          <div class='image_center'>
 			          	<img src='${this.a111RootUrl}/A111/img/unit05/labs/Lab7_schem1.png' width='300' height='375'>
@@ -3917,14 +3918,14 @@ In addition to your lab kit you will need something to play some music, a phone 
 			          	</a>
 			          </div>
 			          <p>First, plug in your lab kit and set the "+Var" to 12V (within 0.1V)</p>
-			          <p>Now build the circuit shown here. </p>
-			          <ul>
-			              <li>I have indicated on the schematic what "connections" on the breadboard I have used to build the circuit. You do not have to use the same ones but it will be easier if you do.</li>
-			              <li>I have indicated what color jumper wires I have used, again you do not have to use the same colors.</li>
-			              <li>A photo is included as well.</li>
-			              <li>Not shown in photo or schematic is the connection from the amp in your lab kit to the speaker in your lab kit. Connect both the top connection of the "Amp Spk Out" to the top connection of "Spk In". then do the same for the bottom connections.</li>
-			              <li>The order you connect the components is not important.</li>
-			          </ul>
+					  <p>Now build the circuit shown here. </p>
+					  <ul>
+						  <li>I have indicated on the schematic what "connections" on the breadboard I have used to build the circuit. You do not have to use the same ones but it will be easier if you do.</li>
+						  <li>I have indicated what color jumper wires I have used, again you do not have to use the same colors.</li>
+						  <li>A photo is included as well.<br><em>Note that the heater connections (pin 4 &amp; 5) are connected differently than shown in the schematic.<br>Follow the schematic and connect the heater as we did in Lab #5-1.</em></li>
+						  <li>Not shown in photo or schematic is the connection from the amp in your lab kit to the speaker in your lab kit. Connect both the top connection of the "Amp Spk Out" to the top connection of "Spk In". then do the same for the bottom connections.</li>
+						  <li>The order you connect the components is not important.</li>
+					  </ul>
 			          <div class='image_center'>
 			          	<a href="${this.a111RootUrl}/A111/img/unit05/labs/Lab8_pic.png" target="new">
 			          		<img src='${this.a111RootUrl}/A111/img/unit05/labs/Lab8_pic.png' alt="" width='500' height='317'>
