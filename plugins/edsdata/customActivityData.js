@@ -11,7 +11,8 @@ function CustomActivityData() {
     this.queryParams = $.getQueryParameters();
     this.assessmentId = this.queryParams.id;
     this.isPreview = this.queryParams.preview ? this.queryParams.preview : false;
-    this.attemptId = '';
+    this.attemptId = this.queryParams.attemptId;
+    this.nonce = this.queryParams.nonce;
     this.APIBaseUrl = '/index.php/api/';
     this.initAttemptEndpoint = this.APIBaseUrl + "attempt/" + this.assessmentId;
     this.gradePassbackEndpoint = this.APIBaseUrl + "grade/passback";
@@ -49,22 +50,12 @@ function CustomActivityData() {
     // returns:
     //  - false on error, otherwise, void
     function apiInitAttempt(params, callback) {
-        var initData = { 'preview': this.isPreview },
+        var initData = { 'preview': this.isPreview, 'attemptId': this.attemptId, 'nonce': this.nonce },
             that = this;
 
         //if no assessment id for query parameter, then no data tracking possible, return false
         if (!this.assessmentId) {
             var errorMessage = 'An assessment ID was not included in the URL on launch.';
-            that.showInitErrorModal(errorMessage);
-            return false;
-        }
-
-        //throw an error if cookies are disabled in the browser
-        if (!navigator.cookieEnabled) {
-            var errorMessage = 'Error: cookies (including third-party cookies) need to be enabled. For instructions, ' +
-                '<a href="https://support.google.com/accounts/answer/61416?hl=en" target="_blank">read this article for Chrome</a>, ' +
-                ' and <a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" target="_blank">' +
-                'read this article for Firefox</a>. You may need to restart your browser for the changes to take effect.';
             that.showInitErrorModal(errorMessage);
             return false;
         }
@@ -79,6 +70,7 @@ function CustomActivityData() {
                 //as undefined unless I used string notation instead for the nested object key.
                 //maybe a quirk of the minifying compiler that C2 uses?
                 that.attemptId = data.data['attemptId'];
+
                 if (callback) {
                     callback();
                 }

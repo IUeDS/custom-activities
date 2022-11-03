@@ -29,6 +29,7 @@ export class LabPageComponent implements OnInit, AfterViewInit {
   attemptId : number = -1; //default; retrieved later by subscription
   attemptCountCorrect : number = 0;
   attemptCountIncorrect : number = 0;
+  nonce = null;
 
   ngOnInit() {
     //get questions
@@ -46,11 +47,17 @@ export class LabPageComponent implements OnInit, AfterViewInit {
       if (params['id']) {
         let preview = params['preview'] ? true : false;
         this.assessmentId = +params['id'];
-        this.datatrackingService.initAttempt(this.assessmentId, preview)
+        this.attemptId = +params['attemptId'];
+        this.nonce = params['nonce'];
+        this.datatrackingService.initAttempt(this.assessmentId, this.attemptId, this.nonce, preview)
           .subscribe(
             res =>  {
               this.attemptId = +(res.data.attemptId);
               this.datatrackingService.setAttemptId(this.attemptId);
+              const apiToken = res.data.apiToken;
+              if (apiToken) {
+                this.datatrackingService.storeStudentToken(apiToken);
+              }
             },
             err => {
               console.log(err);

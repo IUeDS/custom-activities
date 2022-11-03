@@ -1,7 +1,7 @@
 //got lots of help from this tutorial: https://scotch.io/tutorials/angular-2-http-requests-with-observables
 // Imports
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 import { Observable } from 'rxjs';
 
@@ -15,17 +15,38 @@ export class DatatrackingService {
 
   private attemptId: number = -1;
   private APIBaseUrl = '/index.php/api/';
+  private apiToken = null;
   private assessmentId = -1;
+  private studentStorageTokenKey = 'iu-eds-qc-student-token'
 
   setAttemptId(attemptId : number) {
     this.attemptId = attemptId;
   }
 
-  initAttempt(assessmentId : number, preview : boolean) {
+  getStudentTokenFromStorage() {
+    //if in an iframe with 3rd party cookies blocked, return what's in-memory
+    if (!this.storageAvailable('sessionStorage')) {
+      return this.apiToken;
+    }
+
+    return sessionStorage.getItem(this.studentStorageTokenKey);
+  }
+
+  initAttempt(assessmentId : number, attemptId : number, nonce : string, preview : boolean) {
+    this.apiToken = this.getStudentTokenFromStorage();
     this.assessmentId = assessmentId;
-    let endpoint = `${this.APIBaseUrl}attempt/${this.assessmentId}`;
-    let body = {'asssesment_id' : this.assessmentId, 'preview' : preview};
-    return this.http.post(endpoint, body)
+    const endpoint = `${this.APIBaseUrl}attempt/${this.assessmentId}`;
+    const body = {'asssesment_id' : this.assessmentId, 'preview' : preview, 'nonce': nonce, 'attemptId': attemptId};
+
+    const httpOptions = {
+      headers: new HttpHeaders({})
+    };
+
+    if (this.apiToken) {
+      httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${this.apiToken}`);
+    }
+
+    return this.http.post(endpoint, body, httpOptions)
       .pipe(
         map((res: any) => res),
         catchError((error:any) => Observable.throw(error.error || 'Server error'))
@@ -51,5 +72,42 @@ export class DatatrackingService {
         map((res: any) => res),
         catchError((error:any) => Observable.throw(error.error || 'Server error'))
       );
+  }
+
+  //source: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#Testing_for_availability
+  storageAvailable(type) {
+    var storage;
+    try {
+      storage = window[type];
+      var x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    }
+    catch(e) {
+      return e instanceof DOMException && (
+        // everything except Firefox
+        e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === 'QuotaExceededError' ||
+        // Firefox
+        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+        // acknowledge QuotaExceededError only if there's something already stored
+        (storage && storage.length !== 0);
+    }
+  }
+
+  storeStudentToken(token) {
+    this.apiToken = token;
+
+    //if in an iframe with 3rd party cookies blocked, can't store
+    if (!this.storageAvailable('sessionStorage')) {
+      return;
+    }
+
+    sessionStorage.setItem(this.studentStorageTokenKey, this.apiToken);
   }
 }
