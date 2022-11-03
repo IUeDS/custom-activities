@@ -8,13 +8,11 @@ function CustomActivityData() {
     });
 
     // class member variables
-    this.apiToken = null;
     this.queryParams = $.getQueryParameters();
     this.assessmentId = this.queryParams.id;
     this.isPreview = this.queryParams.preview ? this.queryParams.preview : false;
     this.attemptId = this.queryParams.attemptId;
     this.nonce = this.queryParams.nonce;
-    this.studentStorageTokenKey = 'iu-eds-qc-student-token';
     this.APIBaseUrl = '/index.php/api/';
     this.initAttemptEndpoint = this.APIBaseUrl + "attempt/" + this.assessmentId;
     this.gradePassbackEndpoint = this.APIBaseUrl + "grade/passback";
@@ -35,14 +33,11 @@ function CustomActivityData() {
     this.apiGradePassback = apiGradePassback;
     this.appendErrorModals = appendErrorModals;
     this.appendErrorModal = appendErrorModal;
-    this.getApiTokenFromStorage = getApiTokenFromStorage;
     this.getServerError = getServerError;
     this.showAttemptErrorModal = showAttemptErrorModal;
     this.showResponseErrorModal = showResponseErrorModal;
     this.showInitErrorModal = showInitErrorModal;
     this.showGradeErrorModal = showGradeErrorModal;
-    this.storageAvailable = storageAvailable;
-    this.storeStudentToken = storeStudentToken;
 
     // init
     this.appendErrorModals();
@@ -58,8 +53,6 @@ function CustomActivityData() {
         var initData = { 'preview': this.isPreview, 'attemptId': this.attemptId, 'nonce': this.nonce },
             that = this;
 
-        this.apiToken = this.getApiTokenFromStorage();
-
         //if no assessment id for query parameter, then no data tracking possible, return false
         if (!this.assessmentId) {
             var errorMessage = 'An assessment ID was not included in the URL on launch.';
@@ -67,29 +60,16 @@ function CustomActivityData() {
             return false;
         }
 
-        var headers = {};
-
-        if (this.apiToken) {
-            headers['Authorization'] = 'Bearer ' + this.apiToken;
-        }
-
         $.ajax({
             type: 'POST',
             url: that.initAttemptEndpoint,
             data: initData,
             dataType: "json",
-            headers: headers,
             success: function(data) {
                 //not sure why, but dot notation worked fine in plain JS, but in C2, it showed up
                 //as undefined unless I used string notation instead for the nested object key.
                 //maybe a quirk of the minifying compiler that C2 uses?
                 that.attemptId = data.data['attemptId'];
-                var apiToken = data.data['apiToken'];
-
-                if (apiToken) {
-                    that.apiToken = apiToken;
-                    that.storeStudentToken(apiToken);
-                }
 
                 if (callback) {
                     callback();
@@ -235,14 +215,6 @@ function CustomActivityData() {
             '</div>');
     }
 
-    function getApiTokenFromStorage() {
-        if (!this.storageAvailable('sessionStorage')) {
-            return this.apiToken;
-        }
-
-        return sessionStorage.getItem(this.studentStorageTokenKey);
-    }
-
     //convert server response to a readable error message, if available
     function getServerError(jqXHR) {
         var errorString = jqXHR.responseText,
@@ -289,41 +261,5 @@ function CustomActivityData() {
     function showInitErrorModal(errorDetails) {
         $('#apiInitErrorModal .error-details').html(errorDetails);
         $('#apiInitErrorModal').modal({backdrop: 'static', keyboard: false});
-    }
-
-    //source: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#Testing_for_availability
-    function storageAvailable(type) {
-        var storage;
-        try {
-            storage = window[type];
-            var x = '__storage_test__';
-            storage.setItem(x, x);
-            storage.removeItem(x);
-            return true;
-        }
-        catch(e) {
-            return e instanceof DOMException && (
-                // everything except Firefox
-                e.code === 22 ||
-                // Firefox
-                e.code === 1014 ||
-                // test name field too, because code might not be present
-                // everything except Firefox
-                e.name === 'QuotaExceededError' ||
-                // Firefox
-                e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
-                 // acknowledge QuotaExceededError only if there's something already stored
-                (storage && storage.length !== 0);
-       }
-    }
-
-    function storeStudentToken(token) {
-        this.apiToken = token;
-
-        if (!this.storageAvailable('sessionStorage')) {
-            return;
-        }
-
-        sessionStorage.setItem(this.studentStorageTokenKey, this.apiToken);
     }
 }
