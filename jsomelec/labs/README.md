@@ -36,7 +36,7 @@ If you didn't catch it earlier, here's the command to build this for production 
 After that, run rsync from the root of the custom-activities folder to push the changes to the server. This process is detailed in the readme for the custom-activities repo.
 
 ### CSS and Image assets
-Besides component-isolated CSS, all other CSS is located in ~jsomelec/A111/styles.css. We should try to not update that CSS, since it is required by all of the A111 html pages. If you need to make changes to the CSS for any reason, contact Matt Mallon.
+Besides component-isolated CSS, all other CSS is located in jsomelec/A111/styles.css. We should try to not update that CSS, since it is required by all of the A111 html pages. If you need to make changes to the CSS for any reason, contact Matt Mallon.
 
 If you need to link to a relative URL within the course for an image, link, or other resource, replace '../../img' with js variable interpolation of the A111 root url, and then add the name of the course. Example for A112: ${this.a111RootUrl}/A112/img/unit7/testing.html
 
