@@ -19,6 +19,7 @@ function CustomActivityData() {
     // the next two endpoints need attempt ID, not fetched until later, so appended when making the call
     this.updateAttemptEndpoint = this.APIBaseUrl + "attempt/update/";
     this.insertResponseEndpoint = this.APIBaseUrl + "response/";
+    this.attemptStarted = false; //used to prevent errors if an activity mistakenly initializes a second attempt
 
     // the above API Base url should work fine in any webserve environment, but not locally;
     // rather than a whole bunch of environment hassle, just going to check for localhost and adjust accordingly
@@ -60,6 +61,15 @@ function CustomActivityData() {
             return false;
         }
 
+        //MGM, 8/29/23:
+        //Some A111 construct 2 activities were mistakenly re-initializing the attempt in phase 2,
+        //causing an error from the API. The goal here is to prevent those errors from happening if
+        //there are unintended bugs in any of the activities with re-initializing attempts. No activities
+        //currently are using any form of programmatic restart where re-initializing is necessary. 
+        if (this.attemptStarted) {
+            return false;
+        }
+
         $.ajax({
             type: 'POST',
             url: that.initAttemptEndpoint,
@@ -70,6 +80,7 @@ function CustomActivityData() {
                 //as undefined unless I used string notation instead for the nested object key.
                 //maybe a quirk of the minifying compiler that C2 uses?
                 that.attemptId = data.data['attemptId'];
+                that.attemptStarted = true;
 
                 if (callback) {
                     callback();
