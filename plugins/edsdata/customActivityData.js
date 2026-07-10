@@ -7,6 +7,14 @@ function CustomActivityData() {
       }
     });
 
+    // headers required by the back-end's VerifyPublicApiHeaders middleware on all
+    // quiz-taking endpoints: a custom header forces a CORS preflight cross-origin
+    // (blocking casual forgery), and the client signature identifies this caller
+    this.apiHeaders = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-QuickCheck-Client': 'CustomActivity'
+    };
+
     // class member variables
     this.queryParams = $.getQueryParameters();
     this.assessmentId = this.queryParams.id;
@@ -73,6 +81,7 @@ function CustomActivityData() {
         $.ajax({
             type: 'POST',
             url: that.initAttemptEndpoint,
+            headers: that.apiHeaders,
             data: initData,
             dataType: "json",
             success: function(data) {
@@ -113,9 +122,15 @@ function CustomActivityData() {
             params = JSON.parse(params);
         }
 
+        //attempt ids are sequential, so the back-end requires the launch nonce as
+        //proof that this caller actually launched the attempt
+        params = params || {};
+        params.nonce = that.nonce;
+
         $.ajax({
             type: 'POST',
             url: that.updateAttemptEndpoint + that.attemptId,
+            headers: that.apiHeaders,
             data: params,
             dataType: "json",
             success: function(result){
@@ -145,11 +160,13 @@ function CustomActivityData() {
     //  - false on error, void on success
     function apiGradePassback(callback) {
         var that = this,
-            params = { 'attemptId': that.attemptId };
+            //nonce required by the back-end to verify the caller launched this attempt
+            params = { 'attemptId': that.attemptId, 'nonce': that.nonce };
 
         $.ajax({
             type: 'POST',
             url: that.gradePassbackEndpoint,
+            headers: that.apiHeaders,
             data: params,
             dataType: "json",
             success: function(data) {
@@ -184,9 +201,15 @@ function CustomActivityData() {
             params = JSON.parse(params);
         }
 
+        //attempt ids are sequential, so the back-end requires the launch nonce as
+        //proof that this caller actually launched the attempt
+        params = params || {};
+        params.nonce = that.nonce;
+
         $.ajax({
             type: 'POST',
             url: that.insertResponseEndpoint + that.attemptId,
+            headers: that.apiHeaders,
             data: params,
             dataType: "json",
             success: function(result) {
